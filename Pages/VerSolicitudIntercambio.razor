@@ -1,0 +1,148 @@
+﻿@page "/ver-solicitud/{SolicitudId:int}"
+@using IntercambioLibros.Model
+@using IntercambioLibros.Services
+@inject ServicioSolicitudes ServicioSolicitudes
+@inject ServicioLibros ServicioLibros
+@inject SesionService SesionService
+@inject NavigationManager NavManager
+
+<PageTitle>Revisar Solicitud</PageTitle>
+
+<section class="py-5">
+    <div class="container">
+
+        <h2 class="text-center mb-4">📖 Revisar Solicitud de Intercambio</h2>
+        <hr class="mb-5" />
+
+        @if (!SesionService.EstaLogueado)
+        {
+            <div class="text-center">
+                <p class="text-danger">Debes iniciar sesión para revisar solicitudes.</p>
+                <button class="btn btn-outline-primary mt-3" @onclick="() => NavRegistro()">
+                    Ir a Login
+                </button>
+            </div>
+        }
+        else if (solicitud == null)
+        {
+            <div class="text-center">
+                <p class="text-danger">Solicitud no encontrada.</p>
+            </div>
+        }
+        else
+        {
+            <div class="row justify-content-center">
+                <div class="col-md-5 mb-4">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-header text-center bg-light fw-bold">
+                            📚 Tu Libro
+                        </div>
+                        <div class="card-body text-center">
+                            @if (libroSolicitado != null)
+                            {
+                                <img src="@libroSolicitado.ImagenBase64" class="mb-3" style="width: 150px; height: 220px; object-fit: cover; border-radius:8px;" />
+                                <h5>@libroSolicitado.Titulo</h5>
+                                <p class="text-muted">@libroSolicitado.Autor</p>
+                                <p><b>Género:</b> @libroSolicitado.Genero</p>
+                                <p><b>Estado:</b> @libroSolicitado.EstadoFisico</p>
+                                <p><b>Idioma:</b> @libroSolicitado.Idioma</p>
+                            }
+                            else
+                            {
+                                <p class="text-danger">Libro eliminado</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-5 mb-4">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-header text-center bg-light fw-bold">
+                            📚 Libro Ofrecido
+                        </div>
+                        <div class="card-body text-center">
+                            @if (libroOfrecido != null)
+                            {
+                                <img src="@libroOfrecido.ImagenBase64" class="mb-3" style="width: 150px; height: 220px; object-fit: cover; border-radius:8px;" />
+                                <h5>@libroOfrecido.Titulo</h5>
+                                <p class="text-muted">@libroOfrecido.Autor</p>
+                                <p><b>Género:</b> @libroOfrecido.Genero</p>
+                                <p><b>Estado:</b> @libroOfrecido.EstadoFisico</p>
+                                <p><b>Idioma:</b> @libroOfrecido.Idioma</p>
+                            }
+                            else
+                            {
+                                <p class="text-danger">Libro eliminado</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @if (solicitud.Estado == "Pendiente")
+            {
+                <div class="text-center mt-4">
+                    <button class="btn btn-outline-success me-3" style="min-width: 150px;" @onclick="AceptarSolicitud">
+                        Aceptar Intercambio
+                    </button>
+                    <button class="btn btn-outline-danger" style="min-width: 150px;" @onclick="RechazarSolicitud">
+                        Rechazar Intercambio
+                    </button>
+                </div>
+            }
+            else
+            {
+                <div class="text-center mt-4">
+                    <span class="badge rounded-pill bg-primary p-3 fs-5">
+                        Estado: @solicitud.Estado
+                    </span>
+                </div>
+            }
+        }
+    </div>
+</section>
+
+@code {
+    [Parameter]
+    public int SolicitudId { get; set; }
+
+    private SolicitudIntercambio? solicitud;
+    private Libro? libroSolicitado;
+    private Libro? libroOfrecido;
+
+    protected override void OnInitialized()
+    {
+        solicitud = ServicioSolicitudes.ObtenerSolicitudPorId(SolicitudId);
+
+        if (solicitud != null)
+        {
+            libroSolicitado = ServicioLibros.ObtenerLibroPorId(solicitud.LibroSolicitadoId);
+            libroOfrecido = ServicioLibros.ObtenerLibroPorId(solicitud.LibroOfrecidoId);
+        }
+    }
+
+    private void AceptarSolicitud()
+    {
+        if (solicitud != null)
+        {
+            solicitud.Estado = "Aceptada";
+            ServicioLibros.MarcarNoDisponible(solicitud.LibroSolicitadoId);
+            ServicioLibros.MarcarNoDisponible(solicitud.LibroOfrecidoId);
+
+            NavManager.NavigateTo("/historial-intercambios");
+        }
+    }
+
+    private void RechazarSolicitud()
+    {
+        if (solicitud != null)
+        {
+            solicitud.Estado = "Rechazada";
+            NavManager.NavigateTo("/notificaciones");
+        }
+    }
+    private void NavRegistro()
+    {
+        NavManager.NavigateTo("/registro-login");
+    }
+}

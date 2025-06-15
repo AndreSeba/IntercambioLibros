@@ -1,0 +1,381 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\bin\\Debug\\net8.0\\wwwroot\\_framework\\blazor.webassembly.js",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\obj\\Debug\\net8.0\\scopedcss\\bundle\\IntercambioLibros.styles.css",
+      "PackagePath": "staticwebassets\\IntercambioLibros.styles.css"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\audio\\Luna.mp3",
+      "PackagePath": "staticwebassets\\audio\\Luna.mp3"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\css\\ajax-loader.gif",
+      "PackagePath": "staticwebassets\\css\\ajax-loader.gif"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\css\\app.css",
+      "PackagePath": "staticwebassets\\css\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\css\\custom.css",
+      "PackagePath": "staticwebassets\\css\\custom.css"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\css\\normalize.css",
+      "PackagePath": "staticwebassets\\css\\normalize.css"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\css\\vendor.css",
+      "PackagePath": "staticwebassets\\css\\vendor.css"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\icomoon\\Read Me.txt",
+      "PackagePath": "staticwebassets\\icomoon\\Read Me.txt"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\icomoon\\fonts\\icomoon.eot",
+      "PackagePath": "staticwebassets\\icomoon\\fonts\\icomoon.eot"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\icomoon\\fonts\\icomoon.svg",
+      "PackagePath": "staticwebassets\\icomoon\\fonts\\icomoon.svg"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\icomoon\\fonts\\icomoon.ttf",
+      "PackagePath": "staticwebassets\\icomoon\\fonts\\icomoon.ttf"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\icomoon\\fonts\\icomoon.woff",
+      "PackagePath": "staticwebassets\\icomoon\\fonts\\icomoon.woff"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\icomoon\\icomoon.css",
+      "PackagePath": "staticwebassets\\icomoon\\icomoon.css"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\icomoon\\selection.json",
+      "PackagePath": "staticwebassets\\icomoon\\selection.json"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\icon-192.png",
+      "PackagePath": "staticwebassets\\icon-192.png"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\icon-512.png",
+      "PackagePath": "staticwebassets\\icon-512.png"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\Libros360Logo.jpeg",
+      "PackagePath": "staticwebassets\\images\\Libros360Logo.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\Logo365.jpeg.jpg",
+      "PackagePath": "staticwebassets\\images\\Logo365.jpeg.jpg"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\app-store.jpg",
+      "PackagePath": "staticwebassets\\images\\app-store.jpg"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\chocolat\\close.png",
+      "PackagePath": "staticwebassets\\images\\chocolat\\close.png"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\chocolat\\fullscreen-black.png",
+      "PackagePath": "staticwebassets\\images\\chocolat\\fullscreen-black.png"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\chocolat\\fullscreen.png",
+      "PackagePath": "staticwebassets\\images\\chocolat\\fullscreen.png"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\chocolat\\left.png",
+      "PackagePath": "staticwebassets\\images\\chocolat\\left.png"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\chocolat\\loader.gif",
+      "PackagePath": "staticwebassets\\images\\chocolat\\loader.gif"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\chocolat\\right.png",
+      "PackagePath": "staticwebassets\\images\\chocolat\\right.png"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\client-image1.png",
+      "PackagePath": "staticwebassets\\images\\client-image1.png"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\client-image2.png",
+      "PackagePath": "staticwebassets\\images\\client-image2.png"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\client-image3.png",
+      "PackagePath": "staticwebassets\\images\\client-image3.png"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\client-image4.png",
+      "PackagePath": "staticwebassets\\images\\client-image4.png"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\client-image5.png",
+      "PackagePath": "staticwebassets\\images\\client-image5.png"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\curly-divider.svg",
+      "PackagePath": "staticwebassets\\images\\curly-divider.svg"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\default.png",
+      "PackagePath": "staticwebassets\\images\\default.png"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\device.png",
+      "PackagePath": "staticwebassets\\images\\device.png"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\google-play.jpg",
+      "PackagePath": "staticwebassets\\images\\google-play.jpg"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\item.png",
+      "PackagePath": "staticwebassets\\images\\item.png"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\item1.png",
+      "PackagePath": "staticwebassets\\images\\item1.png"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\item3.png",
+      "PackagePath": "staticwebassets\\images\\item3.png"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\item4.png",
+      "PackagePath": "staticwebassets\\images\\item4.png"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\item5.png",
+      "PackagePath": "staticwebassets\\images\\item5.png"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\leaf.png",
+      "PackagePath": "staticwebassets\\images\\leaf.png"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\logo-removebg-preview.png",
+      "PackagePath": "staticwebassets\\images\\logo-removebg-preview.png"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\logo.png",
+      "PackagePath": "staticwebassets\\images\\logo.png"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\logoHori.jpeg.jpg",
+      "PackagePath": "staticwebassets\\images\\logoHori.jpeg.jpg"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\main-banner1.jpg",
+      "PackagePath": "staticwebassets\\images\\main-banner1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\main-banner2.jpg",
+      "PackagePath": "staticwebassets\\images\\main-banner2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\main-logo.png",
+      "PackagePath": "staticwebassets\\images\\main-logo.png"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\ns-arrow-right.svg",
+      "PackagePath": "staticwebassets\\images\\ns-arrow-right.svg"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\pattern1.png",
+      "PackagePath": "staticwebassets\\images\\pattern1.png"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\pattern2.png",
+      "PackagePath": "staticwebassets\\images\\pattern2.png"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\portada_don-quijote-de-la-mancha_miguel-de-cervantes_201504281253.webp",
+      "PackagePath": "staticwebassets\\images\\portada_don-quijote-de-la-mancha_miguel-de-cervantes_201504281253.webp"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\post-img1.jpg",
+      "PackagePath": "staticwebassets\\images\\post-img1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\post-img2.jpg",
+      "PackagePath": "staticwebassets\\images\\post-img2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\post-img3.jpg",
+      "PackagePath": "staticwebassets\\images\\post-img3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\product-item1.jpg",
+      "PackagePath": "staticwebassets\\images\\product-item1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\product-item2.jpg",
+      "PackagePath": "staticwebassets\\images\\product-item2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\product-item3.jpg",
+      "PackagePath": "staticwebassets\\images\\product-item3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\product-item4.jpg",
+      "PackagePath": "staticwebassets\\images\\product-item4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\product-item5.jpg",
+      "PackagePath": "staticwebassets\\images\\product-item5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\product-item6.jpg",
+      "PackagePath": "staticwebassets\\images\\product-item6.jpg"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\product-item7.jpg",
+      "PackagePath": "staticwebassets\\images\\product-item7.jpg"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\product-item8.jpg",
+      "PackagePath": "staticwebassets\\images\\product-item8.jpg"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\single-image.jpg",
+      "PackagePath": "staticwebassets\\images\\single-image.jpg"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\tab-item1.jpg",
+      "PackagePath": "staticwebassets\\images\\tab-item1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\tab-item1.txt",
+      "PackagePath": "staticwebassets\\images\\tab-item1.txt"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\tab-item2.jpg",
+      "PackagePath": "staticwebassets\\images\\tab-item2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\tab-item2.txt",
+      "PackagePath": "staticwebassets\\images\\tab-item2.txt"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\tab-item3.jpg",
+      "PackagePath": "staticwebassets\\images\\tab-item3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\tab-item3.txt",
+      "PackagePath": "staticwebassets\\images\\tab-item3.txt"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\tab-item4.jpg",
+      "PackagePath": "staticwebassets\\images\\tab-item4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\tab-item4.txt",
+      "PackagePath": "staticwebassets\\images\\tab-item4.txt"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\tab-item5.jpg",
+      "PackagePath": "staticwebassets\\images\\tab-item5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\tab-item6.jpg",
+      "PackagePath": "staticwebassets\\images\\tab-item6.jpg"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\tab-item7.jpg",
+      "PackagePath": "staticwebassets\\images\\tab-item7.jpg"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\images\\tab-item8.jpg",
+      "PackagePath": "staticwebassets\\images\\tab-item8.jpg"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\js\\chart-admin.js",
+      "PackagePath": "staticwebassets\\js\\chart-admin.js"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\js\\jquery-1.11.0.min.js",
+      "PackagePath": "staticwebassets\\js\\jquery-1.11.0.min.js"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\js\\modernizr.js",
+      "PackagePath": "staticwebassets\\js\\modernizr.js"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\js\\plugins.js",
+      "PackagePath": "staticwebassets\\js\\plugins.js"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\js\\script.js",
+      "PackagePath": "staticwebassets\\js\\script.js"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\js\\slideNav.js",
+      "PackagePath": "staticwebassets\\js\\slideNav.js"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\js\\slideNav.min.js",
+      "PackagePath": "staticwebassets\\js\\slideNav.min.js"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\manifest.webmanifest",
+      "PackagePath": "staticwebassets\\manifest.webmanifest"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\sample-data\\weather.json",
+      "PackagePath": "staticwebassets\\sample-data\\weather.json"
+    },
+    {
+      "Id": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\style.css",
+      "PackagePath": "staticwebassets\\style.css"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.IntercambioLibros.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.IntercambioLibros.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.IntercambioLibros.props",
+      "PackagePath": "build\\IntercambioLibros.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.IntercambioLibros.props",
+      "PackagePath": "buildMultiTargeting\\IntercambioLibros.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.IntercambioLibros.props",
+      "PackagePath": "buildTransitive\\IntercambioLibros.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

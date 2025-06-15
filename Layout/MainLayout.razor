@@ -1,0 +1,106 @@
+﻿@inherits LayoutComponentBase
+@using IntercambioLibros.Services
+@inject SesionService SesionService
+@inject NavigationManager NavManager
+@inject ServicioNotificaciones ServicioNotificaciones
+@inject ServicioLibros ServicioLibros
+
+<div id="header-wrap">
+    <div class="top-content">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <div class="social-links">
+                <ul class="list-unstyled d-flex mb-0">
+                    <li><a href="#"><i class="icon icon-facebook"></i></a></li>
+                    <li><a href="#"><i class="icon icon-twitter"></i></a></li>
+                    <li><a href="#"><i class="icon icon-youtube-play"></i></a></li>
+                    <li><a href="#"><i class="icon icon-behance-square"></i></a></li>
+                </ul>
+            </div>
+
+            <div class="right-element d-flex align-items-center">
+                @if (!SesionService.EstaLogueado)
+                {
+                    <NavLink class="user-account for-buy" href="/registro-login">
+                        <i class="icon icon-user"></i> <span>Login / Registro</span>
+                    </NavLink>
+                }
+                else
+                {
+                    <div class="dropdown position-relative">
+                        <a class="user-account for-buy dropdown-toggle d-flex align-items-center" href="#" id="perfilDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            @if (!string.IsNullOrEmpty(SesionService.UsuarioActual?.FotoPerfilBase64))
+                            {
+                                <img src="@SesionService.UsuarioActual.FotoPerfilBase64" style="width:35px; height:35px; border-radius:50%; object-fit:cover; margin-right:8px;" />
+                            }
+                            <span>@SesionService.UsuarioActual?.Nombre</span>
+
+                            @if (ServicioNotificaciones.TieneNotificacionesNuevas(SesionService.UsuarioActual?.Id ?? 0))
+                            {
+                                <span class="notificacion-punto"></span>
+                            }
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="perfilDropdown">
+                            <li><NavLink class="dropdown-item" href="/perfil-usuario">Perfil</NavLink></li>
+                            <li>
+                                <NavLink class="dropdown-item d-flex justify-content-between align-items-center" href="/notificaciones">
+                                    Notificaciones
+                                    @if (ServicioNotificaciones.TieneNotificacionesNuevas(SesionService.UsuarioActual?.Id ?? 0))
+                                    {
+                                        <span class="notificacion-punto ms-2"></span>
+                                    }
+                                </NavLink>
+                            </li>
+                            <li><hr class="dropdown-divider" /></li>
+                            <li><button class="dropdown-item text-danger" @onclick="CerrarSesion">Cerrar Sesión</button></li>
+                        </ul>
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <header id="header" class="py-2">
+        <div class="container-fluid d-flex align-items-center">
+            <div class="main-logo me-5">
+                <NavLink href="/">
+                    <img src="images/logo-removebg-preview.png" alt="Libros360" style="height:60px;" />
+                </NavLink>
+            </div>
+            <nav class="flex-grow-1">
+                <ul class="menu-list d-flex mb-0 list-unstyled justify-content-center">
+                    <li class="menu-item"><NavLink href="/" class="nav-link">Inicio</NavLink></li>
+                    <li class="menu-item"><NavLink href="/libros-disponibles" class="nav-link">Libros</NavLink></li>
+
+                    @if (SesionService.EstaLogueado)
+                    {
+                        <li class="menu-item"><NavLink href="/historial-intercambios" class="nav-link">Historial</NavLink></li>
+                        <li class="menu-item"><NavLink href="/registrar-libro" class="nav-link">Registrar Libro</NavLink></li>
+
+                        @if (SesionService.UsuarioActual?.Correo == "admin@libros.com")
+                        {
+                            <li class="menu-item"><NavLink href="/admin" class="nav-link">Admin</NavLink></li>
+                        }
+                    }
+                </ul>
+            </nav>
+        </div>
+    </header>
+</div>
+
+<main class="content px-4">
+    @Body
+</main>
+
+<footer class="text-center py-3" style="background-color: #f8f9fa;">
+    <small>© 2025 IntercambioLibros. Todos los derechos reservados.</small>
+</footer>
+
+@code {
+    private void CerrarSesion()
+    {
+        SesionService.CerrarSesion();
+        NavManager.NavigateTo("/");
+    }
+}

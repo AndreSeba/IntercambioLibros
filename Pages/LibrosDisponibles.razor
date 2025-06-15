@@ -1,0 +1,84 @@
+﻿@page "/libros-disponibles"
+@using IntercambioLibros.Model
+@using IntercambioLibros.Services
+@inject ServicioLibros ServicioLibros
+@inject SesionService SesionService
+@inject NavigationManager NavManager
+
+<PageTitle>Libros Disponibles</PageTitle>
+
+<section class="py-5">
+    <div class="container">
+        <div class="section-header align-center mb-5">
+            <div class="title">
+                <span>Encuentra tu próxima lectura</span>
+            </div>
+            <h2 class="section-title">Libros Disponibles para Intercambio 📚</h2>
+        </div>
+
+        <!-- Filtros -->
+        <div class="row mb-4 justify-content-center">
+            <div class="col-md-5 mb-3">
+                <input type="text" class="form-control" placeholder="Buscar por título..." @bind="FiltroTitulo" @bind:event="oninput" />
+            </div>
+            <div class="col-md-5 mb-3">
+                <select class="form-select" @bind="FiltroGenero">
+                    <option value="">Todos los géneros</option>
+                    @foreach (var genero in Generos)
+                    {
+                        <option value="@genero">@genero</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <hr class="my-4" />
+
+        <!-- Resultados -->
+        @if (LibrosFiltrados.Count == 0)
+        {
+            <div class="alert alert-warning text-center" role="alert">
+                No hay libros disponibles que coincidan con la búsqueda.
+            </div>
+        }
+        else
+        {
+            <div class="row">
+                @foreach (var libro in LibrosFiltrados)
+                {
+                    <div class="col-lg-3 col-md-6 col-sm-12 mb-5 d-flex justify-content-center">
+                        <div class="product-item" style="background-color: #f9f7f2; padding: 20px; border-radius: 10px; transition: all 0.3s ease; width: 100%; max-width: 260px;">
+                            <figure class="product-style mb-3">
+                                <img src="@libro.ImagenBase64" alt="@libro.Titulo" style="height: 250px; object-fit: cover; border-radius: 8px; width: 100%;">
+                                <button type="button" class="add-to-cart" @onclick="() => IrAIntercambio(libro.Id)">Detalles</button>
+                            </figure>
+                            <figcaption>
+                                <h5 style="font-weight: bold; color: #6b4c2b;">@libro.Titulo</h5>
+                                <span style="color: #777777;">@libro.Autor</span>
+                            </figcaption>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</section>
+
+@code {
+    private string FiltroTitulo = "";
+    private string FiltroGenero = "";
+
+    private string[] Generos = { "Novela", "Cuento", "Texto Escolar", "Ensayo", "Otros" };
+
+    private List<Libro> LibrosFiltrados => ServicioLibros.Libros
+    .Where(l => l.Estado == "Disponible" &&
+                l.Aprobado == true && // ✅ Mostrar solo libros aprobados
+                (string.IsNullOrWhiteSpace(FiltroTitulo) || l.Titulo.Contains(FiltroTitulo, StringComparison.OrdinalIgnoreCase)) &&
+                (string.IsNullOrWhiteSpace(FiltroGenero) || l.Genero == FiltroGenero))
+    .ToList();
+
+    private void IrAIntercambio(int idLibro)
+    {
+        NavManager.NavigateTo($"/solicitudes-intercambio/{idLibro}");
+    }
+}

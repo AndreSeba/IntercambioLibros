@@ -1,0 +1,91 @@
+﻿/* Estilo general de formularios */
+.form-control {
+    height: auto;
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+    border-radius: 0.75rem;
+    background-color: #fdfdfd;
+    border: 1px solid #ccc;
+}
+
+.btn {
+    border-radius: 0.75rem;
+    font-weight: 500;
+    padding: 0.45rem 1.25rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-primary {
+    background-color: #d9b08c;
+    border-color: #d9b08c;
+    color: white;
+}
+
+    .btn-primary:hover {
+        background-color: #b38668;
+        border-color: #b38668;
+    }
+
+.card {
+    border-radius: 1rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.container-form {
+    max-width: 500px;
+    margin: auto;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+input[type="file"]::file-selector-button {
+    background-color: #d9b08c;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+}
+
+input::placeholder {
+    color: #aaa;
+}
+
+.alert {
+    border-radius: 0.75rem;
+}
+/* FIX HOME BANNER SLIDER */
+.main-slider {
+    position: relative;
+    overflow: hidden;
+}
+
+.slider-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 2rem 0;
+}
+
+.banner-content {
+    flex: 1 1 45%;
+    padding: 1rem 2rem;
+}
+
+.banner-image {
+    flex: 1 1 45%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    object-fit: contain;
+}
+/*Video*/
+video#video {
+    min-height: 240px;
+    background-color: #000;
+    display: block;
+}

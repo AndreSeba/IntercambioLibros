@@ -1,0 +1,233 @@
+html, body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #f3f1ea;
+    color: #222;
+}
+
+h1:focus {
+    outline: none;
+}
+
+a, .btn-link {
+    color: #0071c1;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+.content {
+    padding-top: 1.1rem;
+}
+
+.valid.modified:not([type=checkbox]) {
+    outline: 1px solid #26b050;
+}
+
+.invalid {
+    outline: 1px solid red;
+}
+
+.validation-message {
+    color: red;
+}
+
+#blazor-error-ui {
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+    #blazor-error-ui .dismiss {
+        cursor: pointer;
+        position: absolute;
+        right: 0.75rem;
+        top: 0.5rem;
+    }
+
+.blazor-error-boundary {
+    background: url(data:image/svg+xml;base64,...base64 omitido por tamaño...) no-repeat 1rem/1.8rem, #b32121;
+    padding: 1rem 1rem 1rem 3.7rem;
+    color: white;
+}
+
+    .blazor-error-boundary::after {
+        content: "An error has occurred.";
+    }
+
+.loading-progress {
+    position: relative;
+    display: block;
+    width: 8rem;
+    height: 8rem;
+    margin: 20vh auto 1rem auto;
+}
+
+    .loading-progress circle {
+        fill: none;
+        stroke: #e0e0e0;
+        stroke-width: 0.6rem;
+        transform-origin: 50% 50%;
+        transform: rotate(-90deg);
+    }
+
+        .loading-progress circle:last-child {
+            stroke: #1b6ec2;
+            stroke-dasharray: calc(3.141 * var(--blazor-load-percentage, 0%) * 0.8), 500%;
+            transition: stroke-dasharray 0.05s ease-in-out;
+        }
+
+.loading-progress-text {
+    position: absolute;
+    text-align: center;
+    font-weight: bold;
+    inset: calc(20vh + 3.25rem) 0 auto 0.2rem;
+}
+
+    .loading-progress-text:after {
+        content: var(--blazor-load-percentage-text, "Loading");
+    }
+
+code {
+    color: #c02d76;
+}
+
+/* --------------------------- */
+/* ?? Personalización LOGIN ?? */
+/* --------------------------- */
+
+.card-form {
+    background-color: #fffaf5;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    padding: 2rem;
+    max-width: 420px;
+    margin: auto;
+}
+
+    .card-form h4 {
+        font-size: 1.3rem;
+    }
+
+    .card-form .form-label {
+        font-size: 0.95rem;
+        font-weight: 600;
+    }
+
+    .card-form .form-control {
+        font-size: 0.9rem;
+        padding: 0.45rem 0.75rem;
+        border-radius: 10px;
+    }
+
+    .card-form .btn-custom {
+        background-color: #c7ac96;
+        color: #fff;
+        border: none;
+        border-radius: 30px;
+        padding: 0.6rem;
+        font-size: 1rem;
+        transition: 0.2s ease-in-out;
+    }
+
+        .card-form .btn-custom:hover {
+            background-color: #b59b85;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+/* Estilo general de botones redondeados */
+.btn {
+    border-radius: 30px !important;
+    font-weight: 500;
+    padding: 0.6rem 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.btn-custom {
+    background-color: #c7ac96;
+    color: white;
+    border: 1px solid #c7ac96;
+}
+
+    .btn-custom:hover {
+        background-color: #b59b85;
+        border-color: #b59b85;
+        color: white;
+    }
+
+/* ?? Mejora del diseño para registrar libro */
+
+.card-libro-form {
+    background-color: #fffaf5;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+}
+
+    .card-libro-form label {
+        font-weight: 600;
+        color: #5a4637;
+    }
+
+    .card-libro-form .form-control,
+    .card-libro-form .form-select {
+        border-radius: 12px;
+        padding: 0.6rem 1rem;
+        font-size: 0.95rem;
+        background-color: #fff;
+    }
+
+    .card-libro-form textarea.form-control {
+        min-height: 90px;
+    }
+
+    .card-libro-form .btn {
+        font-weight: 600;
+        font-size: 1rem;
+        padding: 0.75rem 2rem;
+        border-radius: 30px;
+    }
+
+    .card-libro-form #mapa {
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+.alert {
+    border-radius: 12px;
+}
+
+.notificacion-punto {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 50%;
+}
+
+
+@keyframes parpadeo {
+    0%, 100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.3;
+    }
+}
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}

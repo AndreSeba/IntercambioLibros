@@ -1,0 +1,244 @@
+﻿@page "/solicitudes-intercambio"
+@page "/solicitudes-intercambio/{LibroId:int}"
+@using IntercambioLibros.Model
+@using IntercambioLibros.Services
+@inject ServicioLibros ServicioLibros
+@inject ServicioSolicitudes ServicioSolicitudes
+@inject ServicioUsuarios ServicioUsuarios
+@inject SesionService SesionService
+@inject NavigationManager NavManager
+@inject ServicioNotificaciones ServicioNotificaciones
+@inject IJSRuntime JS
+
+<PageTitle>Solicitar Intercambio</PageTitle>
+
+<section class="container my-5">
+    <div class="text-center mb-4">
+        <h2 class="section-title">📚 Solicitar Intercambio de Libro</h2>
+        <div class="divider mx-auto"></div>
+    </div>
+
+    @if (!SesionService.EstaLogueado)
+    {
+        <div class="alert alert-warning text-center" role="alert">
+            Debes iniciar sesión para solicitar un intercambio.
+        </div>
+        <div class="text-center">
+            <button class="btn btn-outline-primary" @onclick="() => NavRegistro()">Ir a Registro/Login</button>
+        </div>
+    }
+    else
+    {
+        @if (LibroSeleccionado != null)
+        {
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-6">
+                    <div class="card border-0 shadow-sm rounded-4">
+                        <div class="text-center p-4">
+                            <img src="@LibroSeleccionado.ImagenBase64"
+                                 style="width: 160px; height: 240px; object-fit: cover; border-radius: 10px; box-shadow: 0px 2px 8px rgba(0,0,0,0.3);"
+                                 alt="Portada del libro" />
+                        </div>
+
+                        <div class="card-body">
+                            <h3 class="text-center">@LibroSeleccionado.Titulo</h3>
+                            <p class="text-muted text-center">@LibroSeleccionado.Autor</p>
+                            <hr />
+
+                            <ul class="list-unstyled">
+                                <li><b>Género:</b> @LibroSeleccionado.Genero</li>
+                                <li><b>Descripción:</b> @LibroSeleccionado.Descripcion</li>
+                                <li><b>Estado de disponibilidad:</b> @LibroSeleccionado.Estado</li>
+                                <li><b>Estado físico:</b> @LibroSeleccionado.EstadoFisico</li>
+                                <li><b>Editorial:</b> @LibroSeleccionado.Editorial</li>
+                                <li><b>Número de páginas:</b> @LibroSeleccionado.NumeroPaginas</li>
+                                <li><b>Idioma:</b> @LibroSeleccionado.Idioma</li>
+                                <li><b>Detalles físicos:</b> @LibroSeleccionado.DetallesFisicos</li>
+                                <li><b>Fecha de publicación:</b> @LibroSeleccionado.FechaPublicacion.ToString("dd/MM/yyyy")</li>
+                            </ul>
+
+                            @if (!string.IsNullOrEmpty(LibroSeleccionado.AudioResenaBase64))
+                            {
+                                <div class="mt-4">
+                                    <h5>🎧 Reseña en Audio:</h5>
+                                    <audio controls class="w-100">
+                                        <source src="@LibroSeleccionado.AudioResenaBase64" type="audio/mpeg" />
+                                        Tu navegador no soporta el audio.
+                                    </audio>
+                                </div>
+                            }
+
+                            <div class="mt-4 text-center">
+                                <h5>📍 Publicado por:</h5>
+                                <p>
+                                    <b>Nombre:</b> @UsuarioPublicador?.Nombre<br />
+                                    <b>Correo:</b> @UsuarioPublicador?.Correo
+                                </p>
+                                <button class="btn btn-outline-secondary btn-sm" @onclick="IrAlPerfil">Ver Perfil del Usuario</button>
+                            </div>
+
+                            @if (MostrarMapa)
+                            {
+                                <div class="mt-4">
+                                    <h5 class="text-center">Ubicación del Libro:</h5>
+                                    <div id="mapaSolicitud" style="height: 300px; width: 100%; border-radius: 12px;"></div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="card border-0 shadow-sm rounded-4 p-4">
+                        <h4 class="text-center mb-4">¿Con qué libro tuyo deseas intercambiar?</h4>
+
+                        <select class="form-select mb-4" @bind="MiLibroId">
+                            <option value="">-- Seleccionar uno de tus libros --</option>
+                            @foreach (var miLibro in MisLibrosDisponibles)
+                            {
+                                <option value="@miLibro.Id">@miLibro.Titulo - @miLibro.Autor</option>
+                            }
+                        </select>
+
+                        <div class="text-center">
+                            <button class="btn btn-outline-primary btn-lg"
+                                    style="border-color: #6b4c2b; color: #6b4c2b; font-weight: bold; border-radius: 25px; padding: 10px 30px; transition: all 0.3s ease;"
+                                    @onclick="EnviarSolicitud"
+                                    onmouseover="this.style.backgroundColor='#6b4c2b'; this.style.color='#fff';"
+                                    onmouseout="this.style.backgroundColor='transparent'; this.style.color='#6b4c2b';">
+                                Enviar Solicitud de Intercambio
+                            </button>
+                        </div>
+
+
+                        @if (!string.IsNullOrEmpty(Mensaje))
+                        {
+                            <div class="alert alert-success text-center mt-4">@Mensaje</div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</section>
+
+@code {
+    private int? MiLibroId;
+    private string Mensaje = "";
+    private bool MostrarMapa = false;
+
+    private int? _libroSeleccionadoId;
+
+    private int? LibroSeleccionadoId
+    {
+        get => _libroSeleccionadoId;
+        set
+        {
+            _libroSeleccionadoId = value;
+            ActualizarLibroSeleccionado();
+        }
+    }
+
+    private Libro? LibroSeleccionado;
+    private Usuario? UsuarioPublicador;
+
+    private List<Libro> LibrosDisponibles => ServicioLibros.Libros
+        .Where(l => l.Estado == "Disponible" && l.UsuarioId != SesionService.UsuarioActual!.Id)
+        .ToList();
+
+    private List<Libro> MisLibrosDisponibles => ServicioLibros.Libros
+        .Where(l => l.Estado == "Disponible" && l.UsuarioId == SesionService.UsuarioActual!.Id)
+        .ToList();
+
+    [Parameter]
+    public int LibroId { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (MostrarMapa && firstRender)
+        {
+            await JS.InvokeVoidAsync("mostrarMapaSolicitud", LibroSeleccionado!.Latitud, LibroSeleccionado.Longitud);
+        }
+    }
+
+    private async Task ActualizarLibroSeleccionado()
+    {
+        LibroSeleccionado = ServicioLibros.Libros.FirstOrDefault(l => l.Id == LibroSeleccionadoId);
+
+        if (LibroSeleccionado != null)
+        {
+            UsuarioPublicador = ServicioUsuarios.Usuarios.FirstOrDefault(u => u.Id == LibroSeleccionado.UsuarioId);
+
+            MostrarMapa = (LibroSeleccionado.Latitud != 0 && LibroSeleccionado.Longitud != 0);
+
+            if (MostrarMapa)
+            {
+                await Task.Delay(200); // Esperar un poquito para asegurar que el div se cree
+                await JS.InvokeVoidAsync("mostrarMapaSolicitud", LibroSeleccionado.Latitud, LibroSeleccionado.Longitud);
+            }
+        }
+        else
+        {
+            UsuarioPublicador = null;
+            MostrarMapa = false;
+        }
+    }
+
+
+    private void EnviarSolicitud()
+    {
+        if (LibroSeleccionadoId == null || MiLibroId == null)
+        {
+            Mensaje = "Debe seleccionar ambos libros para enviar la solicitud.";
+            return;
+        }
+
+        var solicitud = new SolicitudIntercambio
+            {
+                LibroSolicitadoId = LibroSeleccionadoId.Value,
+                LibroOfrecidoId = MiLibroId.Value,
+                UsuarioSolicitanteId = SesionService.UsuarioActual!.Id,
+                UsuarioDueñoLibroId = LibroSeleccionado!.UsuarioId,
+                Estado = "Pendiente",
+                FechaSolicitud = DateTime.Now
+            };
+
+        ServicioSolicitudes.EnviarSolicitud(solicitud);
+
+        // Crear notificación
+        ServicioNotificaciones.AgregarNotificacion(new NotificacionIntercambio
+            {
+                UsuarioDestinoId = LibroSeleccionado.UsuarioId,
+                SolicitudIntercambioId = solicitud.Id
+            });
+
+        Mensaje = "Solicitud enviada exitosamente.";
+        LibroSeleccionadoId = null;
+        MiLibroId = null;
+    }
+    private void IrAlPerfil()
+    {
+        if (UsuarioPublicador != null)
+        {
+            NavManager.NavigateTo($"/ver-perfil/{UsuarioPublicador.Id}");
+        }
+    }
+
+
+    private void NavRegistro()
+    {
+        NavManager.NavigateTo("/registro-login");
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        if (LibroId != 0)
+        {
+            LibroSeleccionadoId = LibroId;
+            await Task.Delay(100); // Pequeño delay para que los componentes terminen de cargar
+            await ActualizarLibroSeleccionado();
+        }
+    }
+
+}

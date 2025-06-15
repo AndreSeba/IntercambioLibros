@@ -1,0 +1,81 @@
+is_global = true
+build_property.EnableAotAnalyzer = 
+build_property.EnableSingleFileAnalyzer = 
+build_property.EnableTrimAnalyzer = false
+build_property.IncludeAllContentForSelfExtract = 
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = browser
+build_property.RootNamespace = IntercambioLibros
+build_property.RootNamespace = IntercambioLibros
+build_property.ProjectDir = C:\Users\andre\Desktop\IntercambioLibros\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = false
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\andre\Desktop\IntercambioLibros
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 8.0
+build_property.EnableCodeStyleSeverity = 
+
+[C:/Users/andre/Desktop/IntercambioLibros/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/andre/Desktop/IntercambioLibros/Pages/Admin.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW4ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/andre/Desktop/IntercambioLibros/Pages/EditarLibro.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRWRpdGFyTGlicm8ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/andre/Desktop/IntercambioLibros/Pages/HistorialIntercambios.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSGlzdG9yaWFsSW50ZXJjYW1iaW9zLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/andre/Desktop/IntercambioLibros/Pages/Home.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/andre/Desktop/IntercambioLibros/Pages/LibrosDisponibles.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGlicm9zRGlzcG9uaWJsZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/andre/Desktop/IntercambioLibros/Pages/Notificaciones.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTm90aWZpY2FjaW9uZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/andre/Desktop/IntercambioLibros/Pages/PerfilUsuario.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUGVyZmlsVXN1YXJpby5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/andre/Desktop/IntercambioLibros/Pages/RegistrarLibro.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVnaXN0cmFyTGlicm8ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/andre/Desktop/IntercambioLibros/Pages/RegistroLogin.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVnaXN0cm9Mb2dpbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/andre/Desktop/IntercambioLibros/Pages/SolicitudesIntercambio.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU29saWNpdHVkZXNJbnRlcmNhbWJpby5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/andre/Desktop/IntercambioLibros/Pages/VerSolicitudIntercambio.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVmVyU29saWNpdHVkSW50ZXJjYW1iaW8ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/andre/Desktop/IntercambioLibros/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/andre/Desktop/IntercambioLibros/Layout/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-dz7ozsxb3u

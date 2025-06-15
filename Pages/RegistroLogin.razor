@@ -1,0 +1,396 @@
+﻿@page "/registro-login"
+@using IntercambioLibros.Model
+@using IntercambioLibros.Services
+@inject ServicioUsuarios ServicioUsuarios
+@inject SesionService SesionService
+@inject NavigationManager NavManager
+@inject IJSRuntime JS
+
+<PageTitle>Registro y Login</PageTitle>
+
+<section class="py-5" style="background-color: #f3f1ea; min-height: 100vh;">
+    <div class="container">
+
+        <div class="section-header align-center mb-4 text-center">
+            <div class="title text-muted small text-uppercase">Bienvenido a</div>
+            <h2 class="section-title fw-bold">Plataforma de Intercambio de Libros 📚</h2>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+
+                <div class="card-form">
+
+                    @if (mostrarLogin)
+                    {
+                        <h4 class="text-center fw-bold mb-3">Iniciar Sesión</h4>
+                        <EditForm Model="ObjLogin" OnValidSubmit="ValidarCredenciales">
+                            <div class="mb-2">
+                                <label class="form-label">Correo Electrónico</label>
+                                <input type="email" class="form-control" @bind="ObjLogin.Correo" />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Contraseña</label>
+                                <input type="password" class="form-control" @bind="ObjLogin.Contraseña" />
+                            </div>
+                            <div class="d-grid mb-3">
+                                <button type="submit" class="btn btn-custom">Validar Credenciales</button>
+                            </div>
+                        </EditForm>
+
+                        @if (usuarioEncontrado != null)
+                        {
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">📸 Validación Facial</label>
+                                <video id="video" autoplay playsinline muted style="width: 100%; max-height: 240px; border-radius: 0.75rem; background-color: #000;"></video>
+                                <canvas id="canvas" style="display:none;"></canvas>
+                            </div>
+
+                            <div class="d-grid gap-2 mb-3">
+                                <button class="btn btn-outline-primary" @onclick="ValidarRostro">🧠 Validar Rostro</button>
+                            </div>
+                            
+                        }
+
+                        @if (similitudDetectada > 0)
+                        {
+                            <div class="progress mb-3" style="height: 25px;">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated @ObtenerColorBarra()"
+                                     role="progressbar"
+                                     style="width: @similitudDetectada%"
+                                     aria-valuenow="@similitudDetectada"
+                                     aria-valuemin="0" aria-valuemax="100">
+                                    @similitudDetectada%
+                                </div>
+                            </div>
+                        }
+
+                        <div class="text-center">
+                            <button class="btn btn-link text-decoration-none" @onclick="MostrarRegistro">
+                                ¿No tienes cuenta? <b>Registrarse</b>
+                            </button>
+                        </div>
+                    }
+
+                    else
+                    {
+                        <h4 class="text-center fw-bold mb-3">Registrarse</h4>
+                        <EditForm Model="ObjUsuario" OnValidSubmit="RegistrarUsuario">
+                            <div class="mb-2">
+                                <label class="form-label">Nombre</label>
+                                <input type="text" class="form-control"
+                                       value="@ObjUsuario.Nombre"
+                                       @oninput="ActualizarNombreYCorreo" />
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label">Correo Electrónico</label>
+                                <input type="email" class="form-control" @bind="ObjUsuario.Correo" />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Contraseña</label>
+                                <input type="password" class="form-control" @bind="ObjUsuario.Contraseña" />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">📸 Foto de Rostro (Requerida para reconocimiento facial)</label>
+
+                                <!-- Video -->
+                                <video id="video" autoplay playsinline muted style="
+                                    width: 100%;
+                                    max-height: 260px;
+                                    border-radius: 0.75rem;
+                                    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+                                    background-color: #000;
+                                    margin-bottom: 0.5rem;
+                                    display: @(camaraActiva ? "block" : "none");">
+                                </video>
+
+                                <div class="d-grid gap-2">
+                                    @if (!fotoCapturada)
+                                    {
+                                        <button class="btn btn-outline-primary" @onclick="AlternarCamara">
+                                            @(camaraActiva ? "🔌 Apagar Cámara" : "📷 Activar Cámara")
+                                        </button>
+
+                                        @if (camaraActiva)
+                                        {
+                                            <button class="btn btn-outline-secondary" @onclick="TomarFoto">
+                                                📸 Capturar Foto
+                                            </button>
+                                        }
+                                    }
+                                </div>
+
+                                @if (!string.IsNullOrEmpty(fotoBase64))
+                                {
+                                    <img src="@fotoBase64" class="mt-3" style="width: 100%; max-height: 200px; object-fit: cover; border-radius: 0.5rem;" />
+
+                                    <div class="d-grid gap-2 mt-3">
+                                        <button class="btn btn-success" @onclick="RegistrarUsuario">
+                                            ✅ Confirmar y Registrarse
+                                        </button>
+                                        <button class="btn btn-outline-warning" @onclick="VolverATomarFoto">
+                                            🔄 Volver a Tomar Foto
+                                        </button>
+                                    </div>
+                                }
+
+
+                                <canvas id="canvas" style="display:none;"></canvas>
+                            </div>
+
+                        </EditForm>
+
+                        <div class="text-center">
+                            <button class="btn btn-link text-decoration-none" @onclick="MostrarLogin">
+                                ¿Ya tienes cuenta? <b>Iniciar Sesión</b>
+                            </button>
+                        </div>
+                    }
+
+                    @if (!string.IsNullOrEmpty(Mensaje))
+                    {
+                        <div class="alert alert-danger text-center mt-3 rounded-pill shadow-sm">
+                            @Mensaje
+                        </div>
+                    }
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+@code {
+    private Usuario ObjUsuario = new Usuario();
+    private Usuario ObjLogin = new Usuario();
+    private string Mensaje = "";
+    private bool mostrarLogin = true;
+
+
+    private bool fotoCapturada = false;
+    private bool camaraActiva = false;
+    private string fotoBase64 = "";
+
+    private async Task AlternarCamara()
+    {
+        if (!camaraActiva)
+        {
+            camaraActiva = true;
+            await JS.InvokeVoidAsync("iniciarCamara");
+        }
+        else
+        {
+            camaraActiva = false;
+            await JS.InvokeVoidAsync("detenerCamara");
+        }
+    }
+
+    private async Task TomarFoto()
+    {
+        fotoBase64 = await JS.InvokeAsync<string>("capturarFotoBase64");
+        ObjUsuario.FotoPerfilBase64 = fotoBase64;
+        fotoCapturada = true;
+        camaraActiva = false;
+        await JS.InvokeVoidAsync("detenerCamara");
+    }
+    private async Task VolverATomarFoto()
+    {
+        fotoBase64 = "";
+        ObjUsuario.FotoPerfilBase64 = "";
+        fotoCapturada = false;
+        camaraActiva = true;
+        await JS.InvokeVoidAsync("iniciarCamara");
+    }
+
+
+
+
+    private void MostrarRegistro()
+    {
+        mostrarLogin = false;
+        Mensaje = "";
+    }
+
+    private void MostrarLogin()
+    {
+        mostrarLogin = true;
+        Mensaje = "";
+    }
+
+    private void Iniciar_Sesion()
+    {
+        if (string.IsNullOrWhiteSpace(ObjLogin.Correo) || string.IsNullOrWhiteSpace(ObjLogin.Contraseña))
+        {
+            Mensaje = "Debe ingresar correo y contraseña.";
+            return;
+        }
+
+        var usuarioEncontrado = ServicioUsuarios.ValidarLogin(ObjLogin.Correo, ObjLogin.Contraseña);
+
+        if (usuarioEncontrado != null)
+        {
+            SesionService.IniciarSesion(usuarioEncontrado);
+            NavManager.NavigateTo("/perfil-usuario");
+        }
+        else
+        {
+            Mensaje = "Correo o contraseña incorrectos.";
+        }
+    }
+
+    private async Task RegistrarUsuario()
+    {
+        if (string.IsNullOrWhiteSpace(ObjUsuario.Nombre) ||
+            string.IsNullOrWhiteSpace(ObjUsuario.Correo) ||
+            string.IsNullOrWhiteSpace(ObjUsuario.Contraseña))
+        {
+            Mensaje = "Debe completar todos los campos.";
+            return;
+        }
+
+        if (!ObjUsuario.Correo.Contains("@"))
+        {
+            Mensaje = "El correo no es válido.";
+            return;
+        }
+
+        if (ObjUsuario.Contraseña.Length < 4)
+        {
+            Mensaje = "La contraseña debe tener al menos 4 caracteres.";
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(fotoBase64))
+        {
+            Mensaje = "Debe tomarse una foto para registrarse.";
+            return;
+        }
+
+        ObjUsuario.FotoPerfilBase64 = fotoBase64;
+
+        await ServicioUsuarios.RegistrarUsuario(ObjUsuario); // ✅ await necesario
+        SesionService.IniciarSesion(ObjUsuario);
+        NavManager.NavigateTo("/perfil-usuario");
+    }
+
+    private Usuario? usuarioEncontrado = null;
+    private int similitudDetectada = 0;
+    private bool puedeValidarRostro = false;
+
+    // Paso 1: Validar correo y contraseña
+    private async Task ValidarCredenciales()
+    {
+        Mensaje = "";
+        usuarioEncontrado = null;
+        puedeValidarRostro = false;
+        similitudDetectada = 0;
+
+        if (string.IsNullOrWhiteSpace(ObjLogin.Correo) || string.IsNullOrWhiteSpace(ObjLogin.Contraseña))
+        {
+            Mensaje = "Debe ingresar correo y contraseña.";
+            return;
+        }
+
+        usuarioEncontrado = ServicioUsuarios.ValidarLogin(ObjLogin.Correo, ObjLogin.Contraseña);
+
+        if (usuarioEncontrado == null)
+        {
+            Mensaje = "Correo o contraseña incorrectos.";
+            return;
+        }
+
+        // ✅ Si es el admin, iniciar sesión directamente sin rostro
+        if (usuarioEncontrado.Correo == "admin@libros.com")
+        {
+            SesionService.IniciarSesion(usuarioEncontrado);
+            NavManager.NavigateTo("/perfil-usuario");
+            return;
+        }
+
+        // Si no es admin, activar cámara y pedir rostro
+        await JS.InvokeVoidAsync("iniciarCamara");
+        camaraActiva = true;
+        puedeValidarRostro = true;
+    }
+
+
+    // Paso 2: Capturar imagen y comparar
+    private async Task ValidarRostro()
+    {
+        if (usuarioEncontrado == null)
+        {
+            Mensaje = "Debes validar tus credenciales primero.";
+            return;
+        }
+
+        var fotoCapturada = await JS.InvokeAsync<string>("capturarFotoBase64");
+        await JS.InvokeVoidAsync("detenerCamara");
+
+        if (string.IsNullOrWhiteSpace(fotoCapturada))
+        {
+            Mensaje = "No se pudo capturar la imagen.";
+            return;
+        }
+
+        similitudDetectada = CalcularSimilitud(usuarioEncontrado.FotoPerfilBase64, fotoCapturada);
+
+        if (similitudDetectada >= 85)
+        {
+            SesionService.IniciarSesion(usuarioEncontrado);
+            NavManager.NavigateTo("/perfil-usuario");
+        }
+        else
+        {
+            Mensaje = $"Rostro no reconocido. Similitud: {similitudDetectada}%. Intenta nuevamente.";
+            usuarioEncontrado = null;
+            similitudDetectada = 0;
+        }
+    }
+
+    // Comparación simple
+    private int CalcularSimilitud(string base64a, string base64b)
+    {
+        if (base64a == base64b) return 100;
+        int len1 = base64a.Length, len2 = base64b.Length;
+        int min = Math.Min(len1, len2);
+        int diff = Math.Abs(len1 - len2);
+        double porcentaje = 100.0 - ((double)diff / min) * 100.0;
+        return (int)Math.Max(0, Math.Min(100, porcentaje));
+    }
+
+    private string ObtenerColorBarra()
+    {
+        if (similitudDetectada >= 85) return "bg-success";
+        if (similitudDetectada >= 60) return "bg-warning";
+        return "bg-danger";
+    }
+    private void ActualizarNombreYCorreo(ChangeEventArgs e)
+    {
+        var nombreIngresado = e.Value?.ToString() ?? "";
+        ObjUsuario.Nombre = nombreIngresado;
+
+        if (!string.IsNullOrWhiteSpace(nombreIngresado))
+        {
+            var sugerencia = nombreIngresado
+                .ToLower()
+                .Replace("á", "a")
+                .Replace("é", "e")
+                .Replace("í", "i")
+                .Replace("ó", "o")
+                .Replace("ú", "u")
+                .Replace("ñ", "n")
+                .Replace(" ", "");
+
+            if (string.IsNullOrWhiteSpace(ObjUsuario.Correo))
+            {
+                ObjUsuario.Correo = $"{sugerencia}@gmail.com";
+            }
+        }
+    }
+
+
+
+
+}

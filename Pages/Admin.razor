@@ -1,0 +1,335 @@
+﻿@page "/admin"
+@using IntercambioLibros.Model
+@using IntercambioLibros.Services
+@inject ServicioUsuarios ServicioUsuarios
+@inject ServicioLibros ServicioLibros
+@inject ServicioSolicitudes ServicioSolicitudes
+@inject SesionService SesionService
+@inject NavigationManager NavManager
+@inject IJSRuntime JS
+
+<PageTitle>Administración</PageTitle>
+
+<section class="py-5">
+    <div class="container">
+        @if (!SesionService.EstaLogueado || !EsAdmin())
+        {
+            <div class="text-center">
+                <h3 class="text-danger mb-4">🚫 Acceso Restringido</h3>
+                <p>Solo usuarios administradores pueden acceder al panel.</p>
+                <button class="btn btn-outline-primary mt-3" @onclick="NavInicio">Volver al Inicio</button>
+            </div>
+        }
+        else
+        {
+            <!-- Encabezado -->
+            <div class="text-center mb-4">
+                <h1 class="fw-bold">👑 Panel de Administración</h1>
+                <p class="text-muted">Gestiona usuarios, libros, y estadísticas del sistema</p>
+                <hr class="my-4" />
+            </div>
+
+            <!-- BOTONES DE ACCIÓN RÁPIDA -->
+            <div class="d-flex justify-content-center flex-wrap gap-3 mb-5">
+                <button class="btn btn-outline-dark" @onclick="Navperfil">👤 Ver Perfil</button>
+                <button class="btn btn-outline-primary" @onclick="Navregistrarlibro">📘 Registrar Libro</button>
+                <button class="btn btn-outline-success" @onclick="Navlibrosdisponibles">📚 Ver Libros</button>
+                <button class="btn btn-outline-warning" @onclick="Navhistorialintercambios">📑 Ver Historial</button>
+            </div>
+            <!-- TARJETAS DE RESUMEN -->
+            <div class="row text-center mb-5">
+                <div class="col-md-3 mb-3">
+                    <div class="card shadow-sm p-3">
+                        <h5 class="text-muted">Usuarios</h5>
+                        <h2>@ServicioUsuarios.Usuarios.Count</h2>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="card shadow-sm p-3 text-success">
+                        <h5 class="text-muted">Aprobados</h5>
+                        <h2>@ServicioLibros.Libros.Count(l => l.Aprobado)</h2>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="card shadow-sm p-3 text-warning">
+                        <h5 class="text-muted">Pendientes</h5>
+                        <h2>@ServicioLibros.Libros.Count(l => !l.Aprobado)</h2>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="card shadow-sm p-3 text-info">
+                        <h5 class="text-muted">Intercambios</h5>
+                        <h2>@ServicioSolicitudes.Solicitudes.Count(s => s.Estado == "Aceptada")</h2>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GRÁFICOS -->
+            <div class="row mb-5">
+                <div class="col-md-6 mb-4">
+                    <canvas id="graficoEstados" width="400" height="300"></canvas>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <canvas id="graficoGeneros" width="400" height="300"></canvas>
+                </div>
+                <div class="col-md-12">
+                    <canvas id="graficoActividad" width="800" height="300"></canvas>
+                </div>
+            </div>
+
+            <!-- USUARIOS REGISTRADOS -->
+            <div class="mb-5">
+                <h3 class="mb-4">👥 Usuarios Registrados</h3>
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Correo</th>
+                                <th class="text-center">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var usuario in ServicioUsuarios.Usuarios)
+                            {
+                                <tr>
+                                    <td>@usuario.Nombre</td>
+                                    <td>@usuario.Correo</td>
+                                    <td class="text-center">
+                                        @if (usuario.Correo != "admin@libros.com")
+                                        {
+                                            <button class="btn btn-sm btn-outline-danger"
+                                                    @onclick="() => ConfirmarEliminarUsuario(usuario.Id)">
+                                                <i class="bi bi-trash"></i> Eliminar
+                                            </button>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-secondary">Administrador</span>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- LIBROS REGISTRADOS -->
+            <div class="mb-5">
+                <h3 class="mb-4">📚 Libros Registrados</h3>
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Imagen</th>
+                                <th>Título</th>
+                                <th>Autor</th>
+                                <th>Publicado por</th>
+                                <th class="text-center">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var libro in ServicioLibros.Libros)
+                            {
+                                <tr>
+                                    <td><img src="@libro.ImagenBase64" alt="Portada" style="width: 60px; height: 90px; object-fit: cover; border-radius: 6px;" /></td>
+                                    <td>@libro.Titulo</td>
+                                    <td>@libro.Autor</td>
+                                    <td>@ObtenerNombreUsuario(libro.UsuarioId)</td>
+                                    <td class="text-center">
+                                        @if (!libro.Aprobado)
+                                        {
+                                            <button class="btn btn-sm btn-success me-1" @onclick="() => Aprobar(libro.Id)">✅ Aprobar</button>
+                                            <button class="btn btn-sm btn-outline-secondary me-1" @onclick="() => Rechazar(libro.Id)">❌ Rechazar</button>
+                                        }
+                                        <button class="btn btn-sm btn-outline-danger" @onclick="() => ConfirmarEliminarLibro(libro.Id)">
+                                            <i class="bi bi-trash"></i> Eliminar
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- LIBROS PENDIENTES -->
+            <div class="mb-5">
+                <h3 class="mb-4">📌 Libros Pendientes de Aprobación</h3>
+                @if (!ServicioLibros.Libros.Any(l => !l.Aprobado))
+                {
+                    <div class="alert alert-info text-center">No hay libros pendientes.</div>
+                }
+                else
+                {
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Imagen</th>
+                                    <th>Título</th>
+                                    <th>Autor</th>
+                                    <th>Usuario</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var libro in ServicioLibros.Libros.Where(l => !l.Aprobado))
+                                {
+                                    <tr>
+                                        <td><img src="@libro.ImagenBase64" alt="Portada" style="width: 60px; height: 90px; object-fit: cover; border-radius: 6px;" /></td>
+                                        <td>@libro.Titulo</td>
+                                        <td>@libro.Autor</td>
+                                        <td>@ObtenerNombreUsuario(libro.UsuarioId)</td>
+                                        <td class="text-center">
+                                            <button class="btn btn-success btn-sm me-1" @onclick="() => Aprobar(libro.Id)">✅ Aprobar</button>
+                                            <button class="btn btn-danger btn-sm" @onclick="() => Rechazar(libro.Id)">❌ Rechazar</button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            </div>
+
+            @if (!string.IsNullOrEmpty(Mensaje))
+            {
+                <div class="alert alert-success text-center mt-4" role="alert">@Mensaje</div>
+            }
+        }
+    </div>
+</section>
+
+@code {
+    private string Mensaje = "";
+
+    private bool EsAdmin() =>
+        SesionService.UsuarioActual?.Correo == "admin@libros.com";
+
+    private string ObtenerNombreUsuario(int usuarioId)
+    {
+        var usuario = ServicioUsuarios.Usuarios.FirstOrDefault(u => u.Id == usuarioId);
+        return usuario != null ? usuario.Nombre : "Desconocido";
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var estados = ServicioLibros.Libros
+                .GroupBy(l => l.EstadoValidacion)
+                .ToDictionary(g => g.Key, g => g.Count());
+
+            var generos = ServicioLibros.Libros
+                .GroupBy(l => l.Genero)
+                .OrderByDescending(g => g.Count())
+                .Take(5)
+                .ToDictionary(g => g.Key, g => g.Count());
+
+            var dias = Enumerable.Range(0, 7)
+                .Select(i => DateTime.Today.AddDays(-i))
+                .Reverse()
+                .Select(f => new
+                {
+                    Fecha = f.ToString("dd/MM"),
+                    Cantidad = ServicioLibros.Libros.Count(l => l.FechaPublicacion.Date == f.Date)
+                }).ToList();
+
+            await JS.InvokeVoidAsync("inicializarGraficos", estados, generos, dias);
+        }
+    }
+
+    private async Task ConfirmarEliminarUsuario(int id)
+    {
+        var result = await JS.InvokeAsync<object>("Swal.fire", new
+        {
+            title = "¿Eliminar usuario?",
+            text = "Esta acción eliminará al usuario y sus libros.",
+            icon = "warning",
+            showCancelButton = true,
+            confirmButtonColor = "#d33",
+            cancelButtonColor = "#aaa",
+            confirmButtonText = "Sí, eliminar",
+            cancelButtonText = "Cancelar"
+        });
+
+        if ((bool)((System.Text.Json.JsonElement)result).GetProperty("isConfirmed").GetBoolean())
+        {
+            ServicioUsuarios.Usuarios.RemoveAll(u => u.Id == id);
+            ServicioLibros.Libros.RemoveAll(l => l.UsuarioId == id);
+            await ServicioUsuarios.GuardarCambios();
+            await ServicioLibros.GuardarCambios();
+            Mensaje = "✅ Usuario y sus libros eliminados.";
+        }
+    }   
+
+    private async Task ConfirmarEliminarLibro(int id)
+    {
+        var result = await JS.InvokeAsync<object>("Swal.fire", new
+        {
+            title = "¿Eliminar libro?",
+            text = "Esta acción no se puede deshacer.",
+            icon = "warning",
+            showCancelButton = true,
+            confirmButtonColor = "#d33",
+            cancelButtonColor = "#aaa",
+            confirmButtonText = "Sí, eliminar",
+            cancelButtonText = "Cancelar"
+        });
+
+        if ((bool)((System.Text.Json.JsonElement)result).GetProperty("isConfirmed").GetBoolean())
+        {
+            ServicioLibros.Libros.RemoveAll(l => l.Id == id);
+            await ServicioLibros.GuardarCambios();
+            Mensaje = "✅ Libro eliminado correctamente.";
+        }
+    }
+
+    private async Task Aprobar(int libroId)
+    {
+        await ServicioLibros.AprobarLibro(libroId);
+        await ActualizarGraficos(); // <-- ¡nuevo!
+        StateHasChanged();
+        Mensaje = "📗 Libro aprobado correctamente.";
+    }
+
+    private async Task Rechazar(int libroId)
+    {
+        await ServicioLibros.RechazarLibro(libroId);
+        await ActualizarGraficos(); // <-- ¡nuevo!
+        StateHasChanged();
+        Mensaje = "📕 Libro rechazado correctamente.";
+    }
+
+    private async Task ActualizarGraficos()
+    {
+        var estados = ServicioLibros.Libros
+            .GroupBy(l => l.EstadoValidacion)
+            .ToDictionary(g => g.Key, g => g.Count());
+
+        var generos = ServicioLibros.Libros
+            .GroupBy(l => l.Genero)
+            .OrderByDescending(g => g.Count())
+            .Take(5)
+            .ToDictionary(g => g.Key, g => g.Count());
+
+        var dias = Enumerable.Range(0, 7)
+            .Select(i => DateTime.Today.AddDays(-i))
+            .Reverse()
+            .Select(f => new
+            {
+                Fecha = f.ToString("dd/MM"),
+                Cantidad = ServicioLibros.Libros.Count(l => l.FechaPublicacion.Date == f.Date)
+            }).ToList();
+
+        await JS.InvokeVoidAsync("inicializarGraficos", estados, generos, dias);
+    }
+
+    private void NavInicio() => NavManager.NavigateTo("/");
+    private void Navperfil() => NavManager.NavigateTo("/perfil-usuario");
+    private void Navregistrarlibro() => NavManager.NavigateTo("/registrar-libro");
+    private void Navlibrosdisponibles() => NavManager.NavigateTo("/libros-disponibles");
+    private void Navhistorialintercambios() => NavManager.NavigateTo("/historial-intercambios");
+}

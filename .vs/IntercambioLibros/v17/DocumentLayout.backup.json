@@ -1,0 +1,427 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|c:\\users\\andre\\desktop\\intercambiolibros\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|solutionrelative:wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|c:\\users\\andre\\desktop\\intercambiolibros\\pages\\perfilusuario.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|solutionrelative:pages\\perfilusuario.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|c:\\users\\andre\\desktop\\intercambiolibros\\services\\serviciolibros.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|solutionrelative:services\\serviciolibros.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|c:\\users\\andre\\desktop\\intercambiolibros\\pages\\admin.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|solutionrelative:pages\\admin.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|c:\\users\\andre\\desktop\\intercambiolibros\\services\\servicionotificaciones.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|solutionrelative:services\\servicionotificaciones.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|c:\\users\\andre\\desktop\\intercambiolibros\\services\\servicioreconocimientofacial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|solutionrelative:services\\servicioreconocimientofacial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|c:\\users\\andre\\desktop\\intercambiolibros\\pages\\librosdisponibles.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|solutionrelative:pages\\librosdisponibles.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|c:\\users\\andre\\desktop\\intercambiolibros\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|solutionrelative:pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|c:\\users\\andre\\desktop\\intercambiolibros\\wwwroot\\js\\chart-admin.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|solutionrelative:wwwroot\\js\\chart-admin.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|c:\\users\\andre\\desktop\\intercambiolibros\\model\\libro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|solutionrelative:model\\libro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|c:\\users\\andre\\desktop\\intercambiolibros\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|solutionrelative:layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|c:\\users\\andre\\desktop\\intercambiolibros\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|c:\\users\\andre\\desktop\\intercambiolibros\\services\\serviciorese\u00F1as.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|solutionrelative:services\\serviciorese\u00F1as.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|c:\\users\\andre\\desktop\\intercambiolibros\\pages\\historialintercambios.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|solutionrelative:pages\\historialintercambios.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|c:\\users\\andre\\desktop\\intercambiolibros\\pages\\notificaciones.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|solutionrelative:pages\\notificaciones.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|c:\\users\\andre\\desktop\\intercambiolibros\\services\\serviciosolicitudes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|solutionrelative:services\\serviciosolicitudes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|c:\\users\\andre\\desktop\\intercambiolibros\\pages\\registrologin.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|solutionrelative:pages\\registrologin.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|c:\\users\\andre\\desktop\\intercambiolibros\\services\\serviciousuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|solutionrelative:services\\serviciousuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|c:\\users\\andre\\desktop\\intercambiolibros\\pages\\registrarlibro.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|solutionrelative:pages\\registrarlibro.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|c:\\users\\andre\\desktop\\intercambiolibros\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|solutionrelative:app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|c:\\users\\andre\\desktop\\intercambiolibros\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|solutionrelative:_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|c:\\users\\andre\\desktop\\intercambiolibros\\model\\notificacionintercambio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|solutionrelative:model\\notificacionintercambio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|c:\\users\\andre\\desktop\\intercambiolibros\\pages\\editarlibro.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|solutionrelative:pages\\editarlibro.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|c:\\users\\andre\\desktop\\intercambiolibros\\model\\rese\u00F1a.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|solutionrelative:model\\rese\u00F1a.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|c:\\users\\andre\\desktop\\intercambiolibros\\pages\\solicitudesintercambio.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FAC533AE-8062-4E11-A25A-8684B956526A}|IntercambioLibros.csproj|solutionrelative:pages\\solicitudesintercambio.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PerfilUsuario.razor",
+              "DocumentMoniker": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Pages\\PerfilUsuario.razor",
+              "RelativeDocumentMoniker": "Pages\\PerfilUsuario.razor",
+              "ToolTip": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Pages\\PerfilUsuario.razor",
+              "RelativeToolTip": "Pages\\PerfilUsuario.razor",
+              "ViewState": "AgIAAEQBAAAAAAAAAAAgwFsBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-01T21:37:02.056Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "MainLayout.razor",
+              "DocumentMoniker": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Layout\\MainLayout.razor",
+              "RelativeDocumentMoniker": "Layout\\MainLayout.razor",
+              "ToolTip": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Layout\\MainLayout.razor",
+              "RelativeToolTip": "Layout\\MainLayout.razor",
+              "ViewState": "AgIAAGAAAAAAAAAAAAAAAGoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-02T12:29:06.277Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ServicioLibros.cs",
+              "DocumentMoniker": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Services\\ServicioLibros.cs",
+              "RelativeDocumentMoniker": "Services\\ServicioLibros.cs",
+              "ToolTip": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Services\\ServicioLibros.cs",
+              "RelativeToolTip": "Services\\ServicioLibros.cs",
+              "ViewState": "AgIAAG4AAAAAAAAAAADwvzsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T23:50:22.974Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "index.html",
+              "DocumentMoniker": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\index.html",
+              "RelativeDocumentMoniker": "wwwroot\\index.html",
+              "ToolTip": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\index.html",
+              "RelativeToolTip": "wwwroot\\index.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-05-01T23:34:35.848Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ServicioNotificaciones.cs",
+              "DocumentMoniker": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Services\\ServicioNotificaciones.cs",
+              "RelativeDocumentMoniker": "Services\\ServicioNotificaciones.cs",
+              "ToolTip": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Services\\ServicioNotificaciones.cs",
+              "RelativeToolTip": "Services\\ServicioNotificaciones.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAABQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-02T00:08:13.169Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Libro.cs",
+              "DocumentMoniker": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Model\\Libro.cs",
+              "RelativeDocumentMoniker": "Model\\Libro.cs",
+              "ToolTip": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Model\\Libro.cs",
+              "RelativeToolTip": "Model\\Libro.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAywAwAAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-02T22:01:20.911Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Admin.razor",
+              "DocumentMoniker": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Pages\\Admin.razor",
+              "RelativeDocumentMoniker": "Pages\\Admin.razor",
+              "ToolTip": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Pages\\Admin.razor",
+              "RelativeToolTip": "Pages\\Admin.razor",
+              "ViewState": "AgIAAM8AAAAAAAAAAAAiwCYBAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-02T13:49:02.355Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ServicioReconocimientoFacial.cs",
+              "DocumentMoniker": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Services\\ServicioReconocimientoFacial.cs",
+              "RelativeDocumentMoniker": "Services\\ServicioReconocimientoFacial.cs",
+              "ToolTip": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Services\\ServicioReconocimientoFacial.cs",
+              "RelativeToolTip": "Services\\ServicioReconocimientoFacial.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T21:21:34.291Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Home.razor",
+              "DocumentMoniker": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Pages\\Home.razor",
+              "RelativeDocumentMoniker": "Pages\\Home.razor",
+              "ToolTip": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Pages\\Home.razor",
+              "RelativeToolTip": "Pages\\Home.razor",
+              "ViewState": "AgIAAIcAAAAAAAAAAAAAAK4AAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-02T22:09:05.857Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "chart-admin.js",
+              "DocumentMoniker": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\js\\chart-admin.js",
+              "RelativeDocumentMoniker": "wwwroot\\js\\chart-admin.js",
+              "ToolTip": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\wwwroot\\js\\chart-admin.js",
+              "RelativeToolTip": "wwwroot\\js\\chart-admin.js",
+              "ViewState": "AgIAADwAAAAAAAAAAAAAAEYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-05-05T18:40:13.366Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "LibrosDisponibles.razor",
+              "DocumentMoniker": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Pages\\LibrosDisponibles.razor",
+              "RelativeDocumentMoniker": "Pages\\LibrosDisponibles.razor",
+              "ToolTip": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Pages\\LibrosDisponibles.razor",
+              "RelativeToolTip": "Pages\\LibrosDisponibles.razor",
+              "ViewState": "AgIAAEYAAAAAAAAAAIAwwFQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-02T12:42:23.901Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "RegistroLogin.razor",
+              "DocumentMoniker": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Pages\\RegistroLogin.razor",
+              "RelativeDocumentMoniker": "Pages\\RegistroLogin.razor",
+              "ToolTip": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Pages\\RegistroLogin.razor",
+              "RelativeToolTip": "Pages\\RegistroLogin.razor",
+              "ViewState": "AgIAAHEBAAAAAAAAAAAmwIkBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-01T21:22:46.297Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAkwBgAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-27T23:31:08.093Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "HistorialIntercambios.razor",
+              "DocumentMoniker": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Pages\\HistorialIntercambios.razor",
+              "RelativeDocumentMoniker": "Pages\\HistorialIntercambios.razor",
+              "ToolTip": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Pages\\HistorialIntercambios.razor",
+              "RelativeToolTip": "Pages\\HistorialIntercambios.razor",
+              "ViewState": "AgIAANYAAAAAAAAAAAAkwO4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-02T03:47:43.268Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Notificaciones.razor",
+              "DocumentMoniker": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Pages\\Notificaciones.razor",
+              "RelativeDocumentMoniker": "Pages\\Notificaciones.razor",
+              "ToolTip": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Pages\\Notificaciones.razor",
+              "RelativeToolTip": "Pages\\Notificaciones.razor",
+              "ViewState": "AgIAAEMAAAAAAAAAAAAkwF4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-02T22:40:00.88Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ServicioRese\u00F1as.cs",
+              "DocumentMoniker": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Services\\ServicioRese\u00F1as.cs",
+              "RelativeDocumentMoniker": "Services\\ServicioRese\u00F1as.cs",
+              "ToolTip": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Services\\ServicioRese\u00F1as.cs",
+              "RelativeToolTip": "Services\\ServicioRese\u00F1as.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAQwDcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-02T12:59:44.802Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ServicioSolicitudes.cs",
+              "DocumentMoniker": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Services\\ServicioSolicitudes.cs",
+              "RelativeDocumentMoniker": "Services\\ServicioSolicitudes.cs",
+              "ToolTip": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Services\\ServicioSolicitudes.cs",
+              "RelativeToolTip": "Services\\ServicioSolicitudes.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-05T01:14:40.373Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "RegistrarLibro.razor",
+              "DocumentMoniker": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Pages\\RegistrarLibro.razor",
+              "RelativeDocumentMoniker": "Pages\\RegistrarLibro.razor",
+              "ToolTip": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Pages\\RegistrarLibro.razor",
+              "RelativeToolTip": "Pages\\RegistrarLibro.razor",
+              "ViewState": "AgIAALcAAAAAAAAAAAAiwNAAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-02T13:49:15.535Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "ServicioUsuarios.cs",
+              "DocumentMoniker": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Services\\ServicioUsuarios.cs",
+              "RelativeDocumentMoniker": "Services\\ServicioUsuarios.cs",
+              "ToolTip": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Services\\ServicioUsuarios.cs",
+              "RelativeToolTip": "Services\\ServicioUsuarios.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-05T00:44:05.248Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "NotificacionIntercambio.cs",
+              "DocumentMoniker": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Model\\NotificacionIntercambio.cs",
+              "RelativeDocumentMoniker": "Model\\NotificacionIntercambio.cs",
+              "ToolTip": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Model\\NotificacionIntercambio.cs",
+              "RelativeToolTip": "Model\\NotificacionIntercambio.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-03T03:19:06.877Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "_Imports.razor",
+              "DocumentMoniker": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\_Imports.razor",
+              "RelativeDocumentMoniker": "_Imports.razor",
+              "ToolTip": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\_Imports.razor",
+              "RelativeToolTip": "_Imports.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-02T04:49:10.944Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "App.razor",
+              "DocumentMoniker": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\App.razor",
+              "RelativeDocumentMoniker": "App.razor",
+              "ToolTip": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\App.razor",
+              "RelativeToolTip": "App.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-03T18:30:17.586Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "EditarLibro.razor",
+              "DocumentMoniker": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Pages\\EditarLibro.razor",
+              "RelativeDocumentMoniker": "Pages\\EditarLibro.razor",
+              "ToolTip": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Pages\\EditarLibro.razor",
+              "RelativeToolTip": "Pages\\EditarLibro.razor",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-02T20:25:58.958Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Rese\u00F1a.cs",
+              "DocumentMoniker": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Model\\Rese\u00F1a.cs",
+              "RelativeDocumentMoniker": "Model\\Rese\u00F1a.cs",
+              "ToolTip": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Model\\Rese\u00F1a.cs",
+              "RelativeToolTip": "Model\\Rese\u00F1a.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-02T12:59:22.695Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "SolicitudesIntercambio.razor",
+              "DocumentMoniker": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Pages\\SolicitudesIntercambio.razor",
+              "RelativeDocumentMoniker": "Pages\\SolicitudesIntercambio.razor",
+              "ToolTip": "C:\\Users\\andre\\Desktop\\IntercambioLibros\\Pages\\SolicitudesIntercambio.razor",
+              "RelativeToolTip": "Pages\\SolicitudesIntercambio.razor",
+              "ViewState": "AgIAANQAAAAAAAAAAAAIwPQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-02T03:48:00.418Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

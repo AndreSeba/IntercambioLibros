@@ -1,0 +1,347 @@
+﻿@page "/perfil-usuario"
+@page "/ver-perfil/{UsuarioId:int}"
+@using IntercambioLibros.Model
+@using IntercambioLibros.Services
+@inject SesionService SesionService
+@inject ServicioUsuarios ServicioUsuarios
+@inject ServicioLibros ServicioLibros
+@inject ServicioReseñas ServicioReseñas
+@inject NavigationManager NavManager
+@inject IJSRuntime JS
+@using System.Text.Json
+
+@implements IDisposable
+
+<PageTitle>Perfil de Usuario</PageTitle>
+
+<section class="py-5">
+    <div class="container">
+        <div class="section-header align-center mb-5">
+            <h2 class="section-title">
+                @(!usuarioPerfilSeleccionado ? "🧑‍💻 Mi Perfil" : "👤 Perfil del Usuario")
+            </h2>
+
+            @if (usuario != null)
+            {
+                var reseñasUsuario = ServicioReseñas.ObtenerReseñasDeUsuario(usuario.Id);
+                if (reseñasUsuario.Any())
+                {
+                    var promedio = reseñasUsuario.Average(r => r.Puntuacion);
+                    <p class="text-warning mt-2">⭐ Promedio de calificación: <b>@promedio.ToString("0.0")</b>/5</p>
+                }
+            }
+        </div>
+
+        @if (usuario == null)
+        {
+            <div class="alert alert-danger text-center">Usuario no encontrado.</div>
+        }
+        else
+        {
+            <div class="row justify-content-center mb-5">
+                <div class="col-md-6">
+                    <div class="card p-4 shadow-sm" style="background-color: #f9f7f2; border-radius: 10px;">
+                        <div class="text-center mb-4">
+                            @if (!string.IsNullOrEmpty(usuario.FotoPerfilBase64))
+                            {
+                                <img src="@usuario.FotoPerfilBase64" alt="Perfil" class="rounded-circle shadow-sm" style="width:120px; height:120px; object-fit:cover;" />
+                            }
+                            else
+                            {
+                                <span class="icon icon-user" style="font-size:4rem;"></span>
+                            }
+                        </div>
+
+                        @if (modoEdicion)
+                        {
+                            <EditForm Model="usuario" OnValidSubmit="GuardarCambiosPerfil">
+                                <div class="mb-3">
+                                    <label class="form-label">Nombre</label>
+                                    <input class="form-control" @bind="usuario.Nombre" />
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Correo</label>
+                                    <input class="form-control" type="email" @bind="usuario.Correo" />
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Teléfono</label>
+                                    <input class="form-control" @bind="usuario.Telefono" />
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Referencia</label>
+                                    <input class="form-control" @bind="usuario.Direccion" />
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Ubicación en el mapa</label>
+                                    <div id="mapa" style="height:300px;"></div>
+                                    <div class="mt-2">
+                                        <small><b>Latitud:</b> @usuario.Latitud, <b>Longitud:</b> @usuario.Longitud</small>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Actualizar Foto</label>
+                                    <InputFile OnChange="CargarImagen" />
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-success" type="submit" disabled="@BotonGuardarDesactivado">Guardar Cambios</button>
+                                    <button class="btn btn-outline-secondary" @onclick="CancelarEdicion">Cancelar</button>
+                                </div>
+                            </EditForm>
+                        }
+                        else
+                        {
+                            <div class="mb-3">
+                                <p><b>Nombre:</b> @usuario.Nombre</p>
+                                <p><b>Correo:</b> @usuario.Correo</p>
+                                <p><b>Teléfono:</b> @usuario.Telefono</p>
+                                <p><b>Referencia:</b> @usuario.Direccion</p>
+                            </div>
+
+                            @if (usuario.Latitud != 0 && usuario.Longitud != 0)
+                            {
+                                <div class="mb-3">
+                                    <label class="form-label">Ubicación en el mapa</label>
+                                    <div id="mapaVistaPerfil" style="height:300px;"></div>
+                                    <div class="mt-2">
+                                        <small><b>Latitud:</b> @usuario.Latitud, <b>Longitud:</b> @usuario.Longitud</small>
+                                    </div>
+                                </div>
+                            }
+
+                            @if (!usuarioPerfilSeleccionado)
+                            {
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-primary" @onclick="ActivarModoEdicion">Editar Perfil</button>
+                                    <button class="btn btn-danger" @onclick="CerrarSesion" disabled="@BloquearCierreSesion">Cerrar Sesión</button>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-header align-center mb-4">
+                <h3 class="section-title">📚 Libros Publicados</h3>
+            </div>
+
+            @if (LibrosDelUsuario.Count == 0)
+            {
+                <div class="alert alert-warning text-center">No hay libros publicados aún.</div>
+            }
+            else
+            {
+                <div class="row">
+                    @foreach (var libro in LibrosDelUsuario)
+                    {
+                        <div class="col-lg-3 col-md-4 col-sm-6 mb-4 d-flex justify-content-center">
+                            <div class="product-item" style="background-color: #f9f7f2; padding: 20px; border-radius: 10px; text-align: center;">
+                                <figure class="product-style mb-3">
+                                    <img src="@libro.ImagenBase64" alt="Libro" style="height: 250px; object-fit: cover; border-radius: 8px;" />
+                                </figure>
+                                <figcaption>
+                                    <h5 style="font-weight:bold; color: #6b4c2b;">@libro.Titulo</h5>
+                                    <span style="color: #777;">@libro.Autor</span>
+                                    @if (!libro.Aprobado)
+                                    {
+                                        <span class="badge bg-warning text-dark mt-1">⏳ En revisión</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-success mt-1">✅ Aprobado</span>
+                                    }
+
+                                </figcaption>
+                                <div class="btn-wrap mt-3 d-flex justify-content-center gap-2">
+                                    <button class="btn btn-outline-primary btn-sm" @onclick="@(() => EditarLibro(libro.Id))">Editar</button>
+                                    <button class="btn btn-outline-danger btn-sm" @onclick="@(() => EliminarLibro(libro.Id))">Eliminar</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+
+            <div class="section-header align-center my-5">
+                <h3 class="section-title">⭐ Reseñas Recibidas</h3>
+            </div>
+
+            @if (ServicioReseñas.ObtenerReseñasDeUsuario(usuario.Id).Any())
+            {
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <ul class="list-group shadow-sm">
+                            @foreach (var r in ServicioReseñas.ObtenerReseñasDeUsuario(usuario.Id))
+                            {
+                                var evaluador = ServicioUsuarios.ObtenerUsuarioPorId(r.EvaluadorId);
+                                <li class="list-group-item">
+                                    <b>@evaluador?.Nombre</b> calificó con <b>@r.Puntuacion</b> estrella(s)<br />
+                                    <i>"@r.Comentario"</i>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="text-center text-muted">Este usuario aún no tiene reseñas.</div>
+            }
+        }
+    </div>
+</section>
+
+@code {
+    [Parameter] public int UsuarioId { get; set; }
+
+    private Usuario? usuario;
+    private bool usuarioPerfilSeleccionado = false;
+    private List<Libro> LibrosDelUsuario = new();
+    private bool modoEdicion = false;
+    private DotNetObjectReference<PerfilUsuario>? objRef;
+
+    private bool BloquearCierreSesion => string.IsNullOrWhiteSpace(usuario?.Telefono);
+    private bool BotonGuardarDesactivado =>
+        string.IsNullOrWhiteSpace(usuario?.Nombre) ||
+        string.IsNullOrWhiteSpace(usuario?.Correo) ||
+        string.IsNullOrWhiteSpace(usuario?.Telefono);
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (UsuarioId == 0)
+        {
+            usuario = SesionService.UsuarioActual;
+            usuarioPerfilSeleccionado = false;
+
+            if (usuario != null && string.IsNullOrWhiteSpace(usuario.Telefono))
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new
+                {
+                    icon = "warning",
+                    title = "⚠️ Completa tu perfil",
+                    text = "Debes ingresar tu número de teléfono para continuar.",
+                    confirmButtonColor = "#c7ac96"
+                });
+            }
+        }
+        else
+        {
+            usuario = ServicioUsuarios.Usuarios.FirstOrDefault(u => u.Id == UsuarioId);
+            usuarioPerfilSeleccionado = true;
+        }
+
+        if (usuario != null)
+        {
+            LibrosDelUsuario = ServicioLibros.Libros
+                .Where(l => l.UsuarioId == usuario.Id)
+                .ToList();
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && modoEdicion && usuario != null)
+        {
+            objRef = DotNetObjectReference.Create(this);
+            await JS.InvokeVoidAsync("inicializarMapa", objRef);
+        }
+
+        if (firstRender && usuario != null && usuario.Latitud != 0 && usuario.Longitud != 0 && !modoEdicion)
+        {
+            await Task.Delay(300); // Espera para asegurar renderizado completo
+            await JS.InvokeVoidAsync("mostrarMapaPerfil", usuario.Latitud, usuario.Longitud);
+        }
+    }
+
+    [JSInvokable]
+    public void ActualizarUbicacion(double lat, double lng)
+    {
+        if (usuario != null)
+        {
+            usuario.Latitud = lat;
+            usuario.Longitud = lng;
+            InvokeAsync(StateHasChanged);
+        }
+    }
+
+    private async Task GuardarCambiosPerfil()
+    {
+        if (usuario == null) return;
+
+        await ServicioUsuarios.ActualizarUsuario(usuario);
+        SesionService.IniciarSesion(usuario);
+        modoEdicion = false;
+
+        await JS.InvokeVoidAsync("Swal.fire", new
+        {
+            icon = "success",
+            title = "Cambios guardados",
+            text = "Tu perfil ha sido actualizado.",
+            confirmButtonColor = "#c7ac96"
+        });
+
+        await JS.InvokeVoidAsync("mostrarMapaPerfil", usuario.Latitud, usuario.Longitud);
+    }
+
+    private async Task CargarImagen(InputFileChangeEventArgs e)
+    {
+        var archivo = e.File;
+        var buffer = new byte[archivo.Size];
+        await archivo.OpenReadStream().ReadAsync(buffer);
+        usuario!.FotoPerfilBase64 = $"data:{archivo.ContentType};base64,{Convert.ToBase64String(buffer)}";
+    }
+
+    private async Task ActivarModoEdicion()
+    {
+        modoEdicion = true;
+        await InvokeAsync(StateHasChanged);
+        await Task.Delay(300);
+        objRef = DotNetObjectReference.Create(this);
+        await JS.InvokeVoidAsync("inicializarMapa", objRef);
+    }
+
+    private void CancelarEdicion() => modoEdicion = false;
+
+    private void CerrarSesion()
+    {
+        if (!BloquearCierreSesion)
+        {
+            SesionService.CerrarSesion();
+            NavManager.NavigateTo("/registro-login");
+        }
+    }
+
+    private void EditarLibro(int libroId)
+    {
+        NavManager.NavigateTo($"/editar-libro/{libroId}");
+    }
+
+    private async Task EliminarLibro(int libroId)
+    {
+        var result = await JS.InvokeAsync<object>("Swal.fire", new
+        {
+            title = "¿Eliminar libro?",
+            text = "Esta acción no se puede deshacer.",
+            icon = "warning",
+            showCancelButton = true,
+            confirmButtonText = "Sí, eliminar",
+            cancelButtonText = "Cancelar"
+        });
+
+        var isConfirmed = (bool)((JsonElement)result).GetProperty("isConfirmed").GetBoolean();
+
+        if (isConfirmed)
+        {
+            ServicioLibros.EliminarLibro(libroId);
+            LibrosDelUsuario = ServicioLibros.Libros
+                .Where(l => l.UsuarioId == usuario!.Id)
+                .ToList();
+
+            await JS.InvokeVoidAsync("Swal.fire", "Eliminado", "El libro fue eliminado exitosamente.", "success");
+        }
+    }
+
+    public void Dispose()
+    {
+        objRef?.Dispose();
+    }
+}

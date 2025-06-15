@@ -1,0 +1,221 @@
+﻿@page "/registrar-libro"
+@using IntercambioLibros.Model
+@using IntercambioLibros.Services
+@inject ServicioLibros ServicioLibros
+@inject SesionService SesionService
+@inject NavigationManager NavManager
+@inject IJSRuntime JS
+
+@implements IDisposable
+
+<PageTitle>Registrar Libro</PageTitle>
+
+<section class="py-5" style="background-color: #f9f7f2;">
+    <div class="container-fluid">
+
+        <div class="section-header align-center mb-5">
+            <h2 class="section-title">📚 Registrar Nuevo Libro</h2>
+        </div>
+
+        @if (!SesionService.EstaLogueado)
+        {
+            <div class="alert alert-danger text-center">
+                Debes iniciar sesión para registrar un libro.
+            </div>
+            <div class="text-center">
+                <button class="btn btn-primary" @onclick="() => NavRegistro()">Ir a Login</button>
+            </div>
+        }
+        else
+        {
+            <EditForm Model="NuevoLibro" OnValidSubmit="AgregarLibro" class="card-libro-form">
+
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <label class="form-label">Título:</label>
+                        <input type="text" class="form-control" @bind="NuevoLibro.Titulo" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Autor:</label>
+                        <input type="text" class="form-control" @bind="NuevoLibro.Autor" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Género:</label>
+                        <select class="form-select" @bind="NuevoLibro.Genero">
+                            <option value="">Seleccione un género</option>
+                            @foreach (var genero in Generos)
+                            {
+                                <option value="@genero">@genero</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Editorial:</label>
+                        <input type="text" class="form-control" @bind="NuevoLibro.Editorial" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Número de Páginas:</label>
+                        <input type="number" class="form-control" @bind="NuevoLibro.NumeroPaginas" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Idioma:</label>
+                        <input type="text" class="form-control" @bind="NuevoLibro.Idioma" />
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Descripción:</label>
+                        <textarea class="form-control" @bind="NuevoLibro.Descripcion"></textarea>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Detalles Físicos:</label>
+                        <textarea class="form-control" @bind="NuevoLibro.DetallesFisicos"></textarea>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Estado:</label>
+                        <div>
+                            @foreach (var estado in EstadosDisponibilidad)
+                            {
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="estado" value="@estado" @onchange="() => NuevoLibro.Estado = estado" />
+                                    <label class="form-check-label">@estado</label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Estado Físico:</label>
+                        <select class="form-select" @bind="NuevoLibro.EstadoFisico">
+                            <option value="">Seleccione estado físico</option>
+                            @foreach (var estadoFisico in EstadosFisicos)
+                            {
+                                <option value="@estadoFisico">@estadoFisico</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label">Ubicación en el Mapa:</label>
+                        <div id="mapa" style="height: 300px;"></div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Latitud:</label>
+                        <p>@NuevoLibro.Latitud</p>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Longitud:</label>
+                        <p>@NuevoLibro.Longitud</p>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Imagen del Libro:</label>
+                        <InputFile OnChange="CargarImagen" />
+                        @if (!string.IsNullOrEmpty(imagenBase64))
+                        {
+                            <img src="@imagenBase64" class="img-fluid rounded mt-2" style="width: 120px;" />
+                        }
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Reseña en Audio (opcional):</label>
+                        <InputFile OnChange="CargarAudio" accept="audio/*" />
+                        @if (!string.IsNullOrEmpty(audioBase64))
+                        {
+                            <audio controls class="mt-2 w-100">
+                                <source src="@audioBase64" type="audio/mpeg" />
+                            </audio>
+                        }
+                    </div>
+
+                    <div class="col-12 text-center mt-4">
+                        <button type="submit" class="btn btn-success btn-lg">Guardar Libro</button>
+                    </div>
+
+                    @if (!string.IsNullOrEmpty(Mensaje))
+                    {
+                        <div class="alert alert-success text-center mt-3">@Mensaje</div>
+                    }
+                </div>
+
+            </EditForm>
+
+        }
+    </div>
+</section>
+
+@code {
+    private DotNetObjectReference<RegistrarLibro>? objRef;
+    private Libro NuevoLibro = new();
+    private string imagenBase64 = "";
+    private string audioBase64 = "";
+    private string Mensaje = "";
+
+
+    private string[] Generos = { "Novela", "Cuento", "Texto Escolar", "Ensayo", "Otros" };
+    private string[] EstadosDisponibilidad = { "Disponible", "No Disponible" };
+    private string[] EstadosFisicos = { "Nuevo", "Seminuevo", "Viejo", "Dañado" };
+
+    private void AgregarLibro()
+    {
+        if (string.IsNullOrWhiteSpace(NuevoLibro.Titulo) || string.IsNullOrWhiteSpace(NuevoLibro.Autor) || NuevoLibro.Genero == "")
+        {
+            Mensaje = "Debe completar todos los campos obligatorios.";
+            return;
+        }
+
+        NuevoLibro.UsuarioId = SesionService.UsuarioActual!.Id;
+        NuevoLibro.ImagenBase64 = imagenBase64;
+        NuevoLibro.AudioResenaBase64 = audioBase64;
+        NuevoLibro.FechaPublicacion = DateTime.Now;
+
+        ServicioLibros.RegistrarLibro(NuevoLibro);
+        NuevoLibro = new Libro();
+        imagenBase64 = "";
+        audioBase64 = "";
+        Mensaje = "Libro registrado exitosamente.";
+        NuevoLibro.Aprobado = false;
+
+    }
+
+    private async Task CargarImagen(InputFileChangeEventArgs e)
+    {
+        var archivo = e.File;
+        var buffer = new byte[archivo.Size];
+        await archivo.OpenReadStream().ReadAsync(buffer);
+        imagenBase64 = $"data:{archivo.ContentType};base64,{Convert.ToBase64String(buffer)}";
+    }
+
+    private async Task CargarAudio(InputFileChangeEventArgs e)
+    {
+        var archivo = e.File;
+        var buffer = new byte[archivo.Size];
+        await archivo.OpenReadStream().ReadAsync(buffer);
+        audioBase64 = $"data:{archivo.ContentType};base64,{Convert.ToBase64String(buffer)}";
+    }
+
+    private void NavRegistro()
+    {
+        NavManager.NavigateTo("/registro-login");
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            objRef = DotNetObjectReference.Create(this);
+            await JS.InvokeVoidAsync("inicializarMapa", objRef);
+        }
+    }
+
+    [JSInvokable]
+    public void ActualizarUbicacion(double latitud, double longitud)
+    {
+        NuevoLibro.Latitud = latitud;
+        NuevoLibro.Longitud = longitud;
+        InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        objRef?.Dispose();
+    }
+}

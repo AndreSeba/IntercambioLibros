@@ -1,0 +1,94 @@
+﻿@page "/notificaciones"
+@using IntercambioLibros.Model
+@using IntercambioLibros.Services
+@inject ServicioNotificaciones ServicioNotificaciones
+@inject ServicioSolicitudes ServicioSolicitudes
+@inject ServicioLibros ServicioLibros
+@inject SesionService SesionService
+@inject NavigationManager NavManager
+
+<PageTitle>Mis Notificaciones</PageTitle>
+
+<section class="py-5">
+    <div class="container">
+
+        <h2 class="text-center mb-4">🔔 Mis Notificaciones</h2>
+        <hr class="mb-5" />
+
+        @if (!SesionService.EstaLogueado)
+        {
+            <div class="text-center">
+                <p class="text-danger">Debes iniciar sesión para ver tus notificaciones.</p>
+                <button class="btn btn-outline-primary mt-3" @onclick="NavRegistro">
+                    Ir a Login
+                </button>
+            </div>
+        }
+        else
+        {
+            var notificacionesUsuario = ServicioNotificaciones.ObtenerPorUsuario(SesionService.UsuarioActual!.Id);
+
+            @if (notificacionesUsuario.Count == 0)
+            {
+                <div class="text-center">
+                    <p>No tienes notificaciones nuevas.</p>
+                </div>
+            }
+            else
+            {
+                <div class="row g-4">
+                    @foreach (var noti in notificacionesUsuario.OrderByDescending(n => n.Fecha))
+                    {
+                        var solicitud = ServicioSolicitudes.ObtenerSolicitudPorId(noti.SolicitudIntercambioId);
+                        var libroSolicitado = ServicioLibros.ObtenerLibroPorId(solicitud?.LibroSolicitadoId ?? 0);
+                        var libroOfrecido = ServicioLibros.ObtenerLibroPorId(solicitud?.LibroOfrecidoId ?? 0);
+
+                        <div class="col-md-6">
+                            <div class="card shadow-sm border-0 rounded-4 @(noti.Leido ? "bg-light" : "bg-warning bg-opacity-25")" style="transition: 0.3s;">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <h5 class="card-title mb-0">
+                                            📩 Solicitud de Intercambio
+                                        </h5>
+                                        <small class="text-muted">@noti.Fecha.ToString("dd/MM/yyyy HH:mm")</small>
+                                    </div>
+
+                                    <p class="card-text text-dark mb-2">
+                                        Te solicitaron intercambiar
+                                        <b>@(libroSolicitado?.Titulo ?? "Libro desconocido")</b> por
+                                        <b>@(libroOfrecido?.Titulo ?? "Libro desconocido")</b>.
+                                    </p>
+
+                                    @if (!noti.Leido)
+                                    {
+                                        <span class="badge bg-danger mb-3">Nuevo</span>
+                                    }
+
+                                    <div class="text-end">
+                                        <button class="btn btn-outline-primary btn-sm" @onclick="() => AbrirNotificacion(noti.Id, solicitud?.Id ?? 0)">
+                                            Ver Detalles
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        }
+
+    </div>
+</section>
+
+@code {
+    private void AbrirNotificacion(int notificacionId, int solicitudId)
+    {
+        ServicioNotificaciones.MarcarLeido(notificacionId);
+        NavManager.NavigateTo($"/ver-solicitud/{solicitudId}");
+    }
+
+    private void NavRegistro()
+    {
+        NavManager.NavigateTo("/registro-login");
+    }
+}

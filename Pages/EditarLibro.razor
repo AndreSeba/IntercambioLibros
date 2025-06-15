@@ -1,0 +1,127 @@
+﻿@page "/editar-libro/{LibroId:int}"
+
+@using IntercambioLibros.Model
+@using IntercambioLibros.Services
+@inject ServicioLibros ServicioLibros
+@inject NavigationManager Navigation
+@inject IJSRuntime JS
+
+<PageTitle>Editar Libro</PageTitle>
+
+<h3 class="text-center my-4 text-primary">✏️ Editar Libro</h3>
+
+@if (libro == null)
+{
+    <div class="alert alert-danger text-center">Libro no encontrado.</div>
+}
+else
+{
+    <EditForm Model="libro" OnValidSubmit="GuardarCambios">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="container" style="max-width: 700px;">
+            <div class="mb-3">
+                <label class="form-label">Título</label>
+                <InputText class="form-control" @bind-Value="libro.Titulo" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Autor</label>
+                <InputText class="form-control" @bind-Value="libro.Autor" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Género</label>
+                <InputText class="form-control" @bind-Value="libro.Genero" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Editorial</label>
+                <InputText class="form-control" @bind-Value="libro.Editorial" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Idioma</label>
+                <InputText class="form-control" @bind-Value="libro.Idioma" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Número de Páginas</label>
+                <InputNumber class="form-control" @bind-Value="libro.NumeroPaginas" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Estado Físico</label>
+                <InputText class="form-control" @bind-Value="libro.EstadoFisico" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Detalles Físicos</label>
+                <InputTextArea class="form-control" @bind-Value="libro.DetallesFisicos" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Descripción</label>
+                <InputTextArea class="form-control" @bind-Value="libro.Descripcion" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Estado</label>
+                <InputSelect class="form-control" @bind-Value="libro.Estado">
+                    <option value="Disponible">Disponible</option>
+                    <option value="Intercambiado">Intercambiado</option>
+                    <option value="No Disponible">No Disponible</option>
+                </InputSelect>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Imagen del libro</label>
+                <InputFile OnChange="CargarImagen" />
+            </div>
+            @if (!string.IsNullOrEmpty(libro.ImagenBase64))
+            {
+                <div class="text-center mb-3">
+                    <img src="@libro.ImagenBase64" style="max-height: 300px;" />
+                </div>
+            }
+
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-success">Guardar Cambios</button>
+                <button class="btn btn-secondary" @onclick="Volver">Cancelar</button>
+            </div>
+        </div>
+    </EditForm>
+}
+
+@code {
+    [Parameter] public int LibroId { get; set; }
+    private Libro? libro;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(50); // 🔄 da tiempo al renderizado
+        libro = ServicioLibros.ObtenerLibroPorId(LibroId);
+
+        if (libro == null)
+        {
+            Navigation.NavigateTo("/perfil-usuario");
+        }
+    }
+
+    private async void GuardarCambios()
+    {
+        await JS.InvokeVoidAsync("Swal.fire", new
+        {
+            icon = "success",
+            title = "Cambios guardados",
+            timer = 1500,
+            showConfirmButton = false
+        });
+
+        Navigation.NavigateTo("/perfil-usuario");
+    }
+
+    private async Task CargarImagen(InputFileChangeEventArgs e)
+    {
+        var archivo = e.File;
+        var buffer = new byte[archivo.Size];
+        await archivo.OpenReadStream().ReadAsync(buffer);
+        libro!.ImagenBase64 = $"data:{archivo.ContentType};base64,{Convert.ToBase64String(buffer)}";
+    }
+
+    private void Volver()
+    {
+        Navigation.NavigateTo("/perfil-usuario");
+    }
+}

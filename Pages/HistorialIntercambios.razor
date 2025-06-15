@@ -1,0 +1,238 @@
+﻿@page "/historial-intercambios"
+@using IntercambioLibros.Model
+@using IntercambioLibros.Services
+@using System.Text
+@inject ServicioSolicitudes ServicioSolicitudes
+@inject ServicioLibros ServicioLibros
+@inject ServicioUsuarios ServicioUsuarios
+@inject ServicioReseñas ServicioReseñas
+@inject SesionService SesionService
+@inject NavigationManager NavManager
+@inject IBlazorDownloadFileService DownloadFileService
+@inject IJSRuntime JS
+
+<PageTitle>Historial de Intercambios</PageTitle>
+
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">📖 Historial de Intercambios</h2>
+        <hr class="mb-4" />
+
+        @if (!SesionService.EstaLogueado)
+        {
+            <div class="text-center">
+                <p class="text-danger">Debes iniciar sesión para ver tu historial.</p>
+                <button class="btn btn-outline-primary" @onclick="() => NavRegistro()">Ir a Login</button>
+            </div>
+        }
+        else
+        {
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <select class="form-select w-auto" @bind="FiltroEstado">
+                    <option value="">Todos los estados</option>
+                    @foreach (var estado in Estados)
+                    {
+                        <option value="@estado">@estado</option>
+                    }
+                </select>
+
+                <button class="btn btn-outline-success" @onclick="ExportarHistorialAExcel">
+                    📥 Exportar a Excel
+                </button>
+            </div>
+
+            @if (SolicitudesFiltradas.Count == 0)
+            {
+                <div class="text-center">
+                    <p>No hay solicitudes registradas.</p>
+                </div>
+            }
+            else
+            {
+                <div class="row g-4">
+                    @foreach (var solicitud in SolicitudesFiltradas)
+                    {
+                        // Inicializar valores si no existen
+                        if (!PuntuacionesPorSolicitud.ContainsKey(solicitud.Id))
+                            PuntuacionesPorSolicitud[solicitud.Id] = 5;
+
+                        if (!ComentariosPorSolicitud.ContainsKey(solicitud.Id))
+                            ComentariosPorSolicitud[solicitud.Id] = "";
+
+                        var libroSolicitado = ServicioLibros.ObtenerLibroPorId(solicitud.LibroSolicitadoId);
+                        var libroOfrecido = ServicioLibros.ObtenerLibroPorId(solicitud.LibroOfrecidoId);
+
+                        int otroUsuarioId = solicitud.UsuarioSolicitanteId == SesionService.UsuarioActual!.Id
+                        ? solicitud.UsuarioDueñoLibroId
+                        : solicitud.UsuarioSolicitanteId;
+
+                        var otroUsuario = ServicioUsuarios.ObtenerUsuarioPorId(otroUsuarioId);
+
+                        <div class="col-lg-6 col-md-12">
+                            <div class="card h-100 shadow-sm border-0" style="background-color: #f9f7f2;">
+                                <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
+                                    <small class="text-muted">Fecha: @solicitud.FechaSolicitud.ToShortDateString()</small>
+                                    <span class="@ObtenerClaseEstado(solicitud.Estado)">@solicitud.Estado</span>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="row text-center">
+                                        <div class="col-6">
+                                            <h6 class="mb-3"><b>📚 Tu Libro</b></h6>
+                                            @if (libroSolicitado != null)
+                                            {
+                                                <img src="@libroSolicitado.ImagenBase64" alt="Libro Solicitado"
+                                                     class="img-fluid rounded mb-2" style="height: 120px; object-fit: cover;" />
+                                                <p class="small text-dark">@libroSolicitado.Titulo</p>
+                                            }
+                                            else
+                                            {
+                                                <p class="small text-danger">Libro eliminado</p>
+                                            }
+                                        </div>
+
+                                        <div class="col-6">
+                                            <h6 class="mb-3"><b>🔄 Libro Ofrecido</b></h6>
+                                            @if (libroOfrecido != null)
+                                            {
+                                                <img src="@libroOfrecido.ImagenBase64" alt="Libro Ofrecido"
+                                                     class="img-fluid rounded mb-2" style="height: 120px; object-fit: cover;" />
+                                                <p class="small text-dark">@libroOfrecido.Titulo</p>
+                                            }
+                                            else
+                                            {
+                                                <p class="small text-danger">Libro eliminado</p>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @if (solicitud.Estado == "Aceptada" && otroUsuario != null)
+                                {
+                                    <div class="card-footer bg-transparent text-center">
+                                        @if (!string.IsNullOrWhiteSpace(otroUsuario.Telefono))
+                                        {
+                                            <a class="btn btn-success mb-2"
+                                               target="_blank"
+                                               href="https://wa.me/@otroUsuario.Telefono">
+                                                Contactar por WhatsApp
+                                            </a>
+                                        }
+
+                                        @if (!ServicioReseñas.YaCalificó(solicitud.Id, SesionService.UsuarioActual.Id))
+                                        {
+                                            <div class="mt-3">
+                                                <h6 class="text-center text-primary">⭐ Califica este intercambio</h6>
+                                                <div class="mb-2">
+                                                    <label>Puntuación:</label>
+                                                    <select class="form-select" @bind="PuntuacionesPorSolicitud[solicitud.Id]">
+                                                        @for (int i = 1; i <= 5; i++)
+                                                        {
+                                                            <option value="@i">@i estrella(s)</option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                                <div class="mb-2">
+                                                    <label>Comentario:</label>
+                                                    <textarea class="form-control" @bind="ComentariosPorSolicitud[solicitud.Id]" rows="2" placeholder="¿Cómo fue el intercambio?"></textarea>
+                                                </div>
+                                                <button class="btn btn-outline-primary w-100" @onclick="() => GuardarReseña(solicitud.Id, otroUsuario.Id)">
+                                                    Enviar Reseña
+                                                </button>
+                                            </div>
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        }
+    </div>
+</section>
+
+@code {
+    private string FiltroEstado = "";
+    private string[] Estados = { "Pendiente", "Aceptada", "Rechazada", "Cancelada" };
+
+    private Dictionary<int, int> PuntuacionesPorSolicitud = new();
+    private Dictionary<int, string> ComentariosPorSolicitud = new();
+
+    private List<SolicitudIntercambio> SolicitudesFiltradas => ServicioSolicitudes.Solicitudes
+        .Where(s => (s.UsuarioSolicitanteId == SesionService.UsuarioActual!.Id ||
+                     s.UsuarioDueñoLibroId == SesionService.UsuarioActual!.Id) &&
+                    (string.IsNullOrWhiteSpace(FiltroEstado) || s.Estado == FiltroEstado))
+        .OrderByDescending(s => s.FechaSolicitud)
+        .ToList();
+
+    private string ObtenerClaseEstado(string estado)
+    {
+        return estado switch
+        {
+            "Aceptada" => "badge bg-success",
+            "Rechazada" => "badge bg-danger",
+            "Pendiente" => "badge bg-warning text-dark",
+            "Cancelada" => "badge bg-secondary",
+            _ => "badge bg-light"
+        };
+    }
+
+    private void NavRegistro()
+    {
+        NavManager.NavigateTo("/registro-login");
+    }
+
+    private async Task ExportarHistorialAExcel()
+    {
+        if (SolicitudesFiltradas.Count == 0)
+        {
+            await JS.InvokeVoidAsync("Swal.fire", new
+            {
+                icon = "info",
+                title = "Sin datos",
+                text = "No hay solicitudes para exportar."
+            });
+            return;
+        }
+
+        var csv = new StringBuilder();
+        csv.AppendLine("Fecha,Libro Solicitado,Libro Ofrecido,Estado");
+
+        foreach (var s in SolicitudesFiltradas)
+        {
+            var libroSolicitado = ServicioLibros.ObtenerLibroPorId(s.LibroSolicitadoId);
+            var libroOfrecido = ServicioLibros.ObtenerLibroPorId(s.LibroOfrecidoId);
+
+            string linea = $"{s.FechaSolicitud:dd/MM/yyyy}," +
+                           $"{libroSolicitado?.Titulo ?? "Eliminado"}," +
+                           $"{libroOfrecido?.Titulo ?? "Eliminado"}," +
+                           $"{s.Estado}";
+
+            csv.AppendLine(linea);
+        }
+
+        byte[] archivo = Encoding.UTF8.GetBytes(csv.ToString());
+        await DownloadFileService.DownloadFile($"Historial_{DateTime.Now:yyyyMMdd_HHmm}.csv", archivo, "text/csv");
+    }
+
+    private void GuardarReseña(int solicitudId, int evaluadoId)
+    {
+        var evaluadorId = SesionService.UsuarioActual!.Id;
+        var puntuacion = PuntuacionesPorSolicitud[solicitudId];
+        var comentario = ComentariosPorSolicitud[solicitudId];
+
+        ServicioReseñas.AgregarReseña(new Reseña
+            {
+                SolicitudId = solicitudId,
+                EvaluadorId = evaluadorId,
+                EvaluadoId = evaluadoId,
+                Puntuacion = puntuacion,
+                Comentario = comentario
+            });
+
+        // Limpia los datos del formulario
+        PuntuacionesPorSolicitud.Remove(solicitudId);
+        ComentariosPorSolicitud.Remove(solicitudId);
+    }
+}
